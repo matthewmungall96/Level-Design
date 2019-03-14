@@ -12,6 +12,13 @@ public class Pipe : MonoBehaviour, IInteractable
 
     public UnityEvent onPowered, onNotPowered;
 
+    private float targetRotation;
+
+    private int rotationDir = 1;
+
+    private float rotationSpeed = 1;
+    public float RotationSpeed { get { return rotationSpeed; } set { rotationSpeed = value; } }
+
     bool hasPower;
     public bool HasPower
     {
@@ -43,7 +50,7 @@ public class Pipe : MonoBehaviour, IInteractable
             MeshRenderer[] meshRend = GetComponentsInChildren<MeshRenderer>();
 
             for (int i = 0; i < meshRend.Length; i++) {
-                meshRend[i].material.color = Color.green;
+                meshRend[i].material.SetColor("_BaseColor", Color.green);
             }
         });
 
@@ -52,26 +59,33 @@ public class Pipe : MonoBehaviour, IInteractable
 
             for (int i = 0; i < meshRend.Length; i++)
             {
-                meshRend[i].material.color = Color.blue;
+                meshRend[i].material.SetColor("_BaseColor", Color.blue);
             }
         });
+
+        targetRotation = transform.rotation.eulerAngles.z;
     }
 
-    public void Rotate()
+    public void Rotate(int dir)
     {
-        StartCoroutine("RotateCoroutine");
+        StopAllCoroutines();
+        StartCoroutine("RotateCoroutine", dir);
     }
 
-    IEnumerator RotateCoroutine()
+    IEnumerator RotateCoroutine(int dir)
     {
+        // Calculate rotations
+        targetRotation += 90;
         Quaternion fromAngle = transform.rotation;
-        Quaternion toAngle = Quaternion.Euler(transform.eulerAngles + new Vector3(0, 0, 90));
+        Quaternion toAngle = Quaternion.Euler(new Vector3(0, 0, targetRotation * dir));
 
-        for (var t = 0f; t < 1; t += Time.deltaTime)
+        // Calculate adjusted speed (a = (90 / (target - current)) * 5
+        float adjustedRotSpeed = ((targetRotation - fromAngle.eulerAngles.z) / 90) * rotationSpeed;
+
+        for (var t = 0f; t < 1f; t += Time.deltaTime)
         {
             yield return null;
-            transform.rotation = Quaternion.Lerp(fromAngle, toAngle, Time.deltaTime);
-            Debug.Log("Rotation: " + transform.rotation.eulerAngles);
+            transform.rotation = Quaternion.Lerp(fromAngle, toAngle, t * rotationSpeed);
         }
 
         // Snap to final rotation
@@ -80,8 +94,8 @@ public class Pipe : MonoBehaviour, IInteractable
         onRotateCompleted.Invoke();
     }
 
-    public void OnInteract()
+    public void OnInteract(bool leftClick)
     {
-        Rotate();
+        Rotate((leftClick) ? 1 : -1);
     }
 }

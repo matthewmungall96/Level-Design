@@ -23,22 +23,20 @@ public class PlayerInteraction : MonoBehaviour {
 	
 	void Update () {
 
-        if (Input.GetMouseButtonDown(0))
+        bool leftClicked = Input.GetMouseButtonDown(0);
+
+        if (leftClicked || Input.GetMouseButtonDown(1))
         {
             ray = rayCam.ScreenPointToRay(new Vector3(halfScreenWidth, halfScreenHeight, 0));
 
-            Debug.Log("Boop");
             if (Physics.Raycast(ray, out hit, interactionDistance, layerMask))
             {
 
                 IInteractable interactable = hit.collider.GetComponent<IInteractable>();
 
-                Debug.Log("Other collider: " + hit.collider.name);
                 if (interactable != null)
                 {
-                    Debug.Log("Beep");
-
-                    interactable.OnInteract();
+                    interactable.OnInteract(leftClicked);
                 }
             }
         }

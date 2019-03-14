@@ -8,6 +8,8 @@ public class PipeSystem : MonoBehaviour {
     public Pipe start, finish;
     Pipe[] pipes;
 
+    public float pipeRotationSpeed = 1f;
+
     public UnityEvent onComplete;
 
     private void Start()
@@ -17,6 +19,23 @@ public class PipeSystem : MonoBehaviour {
         for(int i = 0; i < pipes.Length; i++)
         {
             pipes[i].onRotateCompleted = () => UpdateConnections(start, null);
+        }
+
+        SetPipeRotationSpeed(pipeRotationSpeed, pipes);
+    }
+
+    private void OnValidate()
+    {
+        SetPipeRotationSpeed(pipeRotationSpeed);
+    }
+
+    private void SetPipeRotationSpeed(float speed, Pipe[] pipes = null)
+    {
+        pipes = pipes ?? GetComponentsInChildren<Pipe>();
+
+        for (int i = 0; i < pipes.Length; i++)
+        {
+            pipes[i].RotationSpeed = pipeRotationSpeed;
         }
     }
 
@@ -42,8 +61,6 @@ public class PipeSystem : MonoBehaviour {
 
         pipe.HasPower = true;
 
-        Debug.Log("PipeIteration");
-
         for (int i = 0; i < connectionsNo; i++)
         {
             currentConnection = pipe.connections[i];
@@ -59,8 +76,6 @@ public class PipeSystem : MonoBehaviour {
             {
                 UpdateConnections(connected.parent, connected);
             }
-
-            Debug.Log("Connection Iteration");
         }
     }   
     
