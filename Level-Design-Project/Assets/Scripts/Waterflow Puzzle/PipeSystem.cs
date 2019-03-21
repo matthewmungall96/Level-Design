@@ -5,23 +5,54 @@ using UnityEngine.Events;
 
 public class PipeSystem : MonoBehaviour {
 
+    // The start and end pipes
     public Pipe start, finish;
+
+    // All pipes in the system - Retrieved in start
     Pipe[] pipes;
 
+    // All pipes in the system that have power
+    private List<Pipe> poweredPipes = new List<Pipe>();
+
+    // Controls the rotation speed of all pipes in the system
     public float pipeRotationSpeed = 1f;
 
+    // Event is called when connected from start to finish
     public UnityEvent onComplete;
+
+    // Controls whether the system has any power to it
+    public bool isPowered = true;
 
     private void Start()
     {
         pipes = GetComponentsInChildren<Pipe>();
-        
+
         for(int i = 0; i < pipes.Length; i++)
         {
-            pipes[i].onRotateCompleted = () => UpdateConnections(start, null);
+            pipes[i].onRotate = UpdatePipesStates;
+            pipes[i].onRotateCompleted = ()=> UpdatePipesStates();
         }
 
         SetPipeRotationSpeed(pipeRotationSpeed, pipes);
+
+        // Update powered state
+        SetPowered(isPowered);
+    }
+
+    public void SetPowered(bool powered)
+    {
+        isPowered = powered;
+
+        if (isPowered)
+        {
+            start.HasPower = true;
+            UpdatePipesStates();
+        }
+        else
+        {
+            start.HasPower = false;
+            UpdatePipesStates();
+        }
     }
 
     private void OnValidate()
@@ -29,6 +60,7 @@ public class PipeSystem : MonoBehaviour {
         SetPipeRotationSpeed(pipeRotationSpeed);
     }
 
+    // Set rotation speed for all pipes in the system
     private void SetPipeRotationSpeed(float speed, Pipe[] pipes = null)
     {
         pipes = pipes ?? GetComponentsInChildren<Pipe>();
@@ -39,27 +71,18 @@ public class PipeSystem : MonoBehaviour {
         }
     }
 
-    private void Update()
+    // Recursive method for retrieving all powered pipes
+    private void UpdateConnections(Pipe pipe, PipeConnector connectedPoint, Pipe skipPipe = null)
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            ClearPower();
-            UpdateConnections(start, null);
+        // Skip the pipe if told to or if the system has no power anyway
+        if (skipPipe == pipe || isPowered == false)
+            return;
 
-            if(finish.HasPower)
-            {
-                Debug.Log("Rad");
-            }
-        }
-    }
-
-    private void UpdateConnections(Pipe pipe, PipeConnector connectedPoint)
-    {
         int connectionsNo = pipe.connections.Length;
 
         PipeConnector currentConnection, connected;
 
-        pipe.HasPower = true;
+        poweredPipes.Add(pipe);
 
         for (int i = 0; i < connectionsNo; i++)
         {
@@ -72,18 +95,36 @@ public class PipeSystem : MonoBehaviour {
             connected = currentConnection.connected;
 
             // Process the connected pipes connections only if it doesn't have power already
-            if (connected != null && !connected.parent.HasPower)
+            if (connected != null && !poweredPipes.Contains(connected.parent))
             {
-                UpdateConnections(connected.parent, connected);
+                UpdateConnections(connected.parent, connected, skipPipe);
             }
         }
-    }   
-    
-    void ClearPower()
+    }
+
+    private void UpdatePipesStates(Pipe skipPipe = null)
     {
+        // Empty powered pipes list
+        poweredPipes.Clear();
+
+        // Update list of powered pipes
+        UpdateConnections(start, null, skipPipe);
+
+        // Activate powered pipes and deactivate non-powered pipes
         for (int i = 0; i < pipes.Length; i++)
         {
-            pipes[i].HasPower = false;
+            if (poweredPipes.Contains(pipes[i]))
+            {
+                pipes[i].HasPower = true;
+            }
+            else
+            {
+                pipes[i].HasPower = false;
+            }
         }
+
+        if (finish.HasPower)
+            onComplete.Invoke();
     }
+
 }
