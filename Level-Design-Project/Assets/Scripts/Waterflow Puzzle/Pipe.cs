@@ -49,6 +49,8 @@ public class Pipe : MonoBehaviour, IInteractable
         }
     }
 
+    public bool IsLocked { get; set; }
+
     void Start()
     {
         onNotPowered = onNotPowered ?? new UnityEvent();
@@ -127,12 +129,63 @@ public class Pipe : MonoBehaviour, IInteractable
         }
     }
 
+    // Rotate to a random orientation
+    public void RotateRandomly(bool sendOnRotateEvent = true, bool sendOnCompleteEvent = true)
+    {
+        if (isRotating)
+        {
+            rotateQueue.Enqueue(RotateRandomlyCoroutine(sendOnRotateEvent, sendOnCompleteEvent));
+        }
+        else
+        {
+            StartCoroutine(RotateRandomlyCoroutine(sendOnRotateEvent, sendOnCompleteEvent));
+        }
+    }
+
+    IEnumerator RotateRandomlyCoroutine(bool sendOnRotateEvent = true, bool sendOnCompleteEvent = true)
+    {
+        isRotating = true;
+
+        if(sendOnRotateEvent)
+            onRotate.Invoke(this);
+
+        // Choose -1 or 1 at random
+        int dir = ((Random.value * 2) - 1) < 1 ? -1 : 1;
+
+        // Smooth lerp to random rotation
+        Quaternion sourceOrientation = transform.rotation;
+        Quaternion targetOrientation = sourceOrientation * Quaternion.Euler(0, 0, Random.Range(0, 360) * dir);
+
+        for (var t = 0f; t < 1f; t += Time.deltaTime * rotationSpeed)
+        {
+            yield return null;
+
+            transform.rotation = Quaternion.Slerp(sourceOrientation, targetOrientation, t);
+        }
+
+        // Snap to final rotation
+        transform.rotation = targetOrientation;
+
+        isRotating = false;
+
+        // Start the next rotation if one queued, otherwise trigger the on rotate completed event
+        if (rotateQueue.Count > 0)
+        {
+            StartCoroutine(rotateQueue.Dequeue());
+        }
+        else if(sendOnCompleteEvent)
+        {
+            onRotateCompleted.Invoke();
+        }
+    }
+
     /// <summary>
     /// Triggered via the inteeraction system
     /// </summary>
     /// <param name="leftClick">True means left click, false means right click</param>
     public void OnInteract(bool leftClick)
     {
-        Rotate((leftClick) ? 1 : -1);
+        if(!IsLocked)
+            Rotate((leftClick) ? 1 : -1);
     }
 }

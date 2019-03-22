@@ -14,7 +14,9 @@ public class PlayerInteraction : MonoBehaviour {
     public float interactionDistance = 1f;
     public LayerMask layerMask;
 
-	void Start () {
+    public bool UseMousePosition { get; set; }
+
+    void Start () {
         rayCam = Camera.main;	
 
         halfScreenWidth = Screen.width / 2;
@@ -27,11 +29,18 @@ public class PlayerInteraction : MonoBehaviour {
 
         if (leftClicked || Input.GetMouseButtonDown(1))
         {
-            ray = rayCam.ScreenPointToRay(new Vector3(halfScreenWidth, halfScreenHeight, 0));
+            // Select appropriate ray
+            if (UseMousePosition)
+            { 
+                ray = rayCam.ScreenPointToRay(new Vector3(halfScreenWidth, halfScreenHeight, 0));
+            }
+            else
+            {
+                ray = rayCam.ScreenPointToRay(Input.mousePosition);
+            }
 
             if (Physics.Raycast(ray, out hit, interactionDistance, layerMask))
             {
-
                 IInteractable interactable = hit.collider.GetComponent<IInteractable>();
 
                 if (interactable != null)

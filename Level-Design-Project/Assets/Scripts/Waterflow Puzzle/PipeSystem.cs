@@ -23,6 +23,9 @@ public class PipeSystem : MonoBehaviour {
     // Controls whether the system has any power to it
     public bool isPowered = true;
 
+    // Locks interaction on complete
+    public bool lockOnComplete = true;
+
     private void Start()
     {
         pipes = GetComponentsInChildren<Pipe>();
@@ -124,7 +127,61 @@ public class PipeSystem : MonoBehaviour {
         }
 
         if (finish.HasPower)
+        {
             onComplete.Invoke();
+
+            // Lock interaction on complete if told to
+            if (lockOnComplete)
+            {
+                for (int i = 0; i < pipes.Length; i++)
+                {
+                    pipes[i].IsLocked = true;
+                }
+            }
+        }
     }
 
+    public void Shuffle()
+    {
+        SetPowered(false);
+        //// Clear power from pipes
+        //for (int i = 0; i < pipes.Length; i++)
+        //{
+        //    pipes[i].HasPower = false;
+        //}
+
+        // Shuffle pipes - skipping the start and finish
+        for (int i = 0; i < pipes.Length; i++)
+        {
+            if (pipes[i] == start || pipes[i] == finish)
+                continue;
+
+            pipes[i].RotateRandomly(false, false);
+        }
+
+        UpdatePipesStates();
+    }
+    
+    IEnumerator ShuffleCoroutine()
+    {
+        SetPowered(false);
+        //// Clear power from pipes
+        //for (int i = 0; i < pipes.Length; i++)
+        //{
+        //    pipes[i].HasPower = false;
+        //}
+
+        yield return null;
+
+        // Shuffle pipes - skipping the start and finish
+        for (int i = 0; i < pipes.Length; i++)
+        {
+            if (pipes[i] == start || pipes[i] == finish)
+                continue;
+
+            pipes[i].RotateRandomly(false, false);
+        }
+
+        UpdatePipesStates();
+    }
 }
