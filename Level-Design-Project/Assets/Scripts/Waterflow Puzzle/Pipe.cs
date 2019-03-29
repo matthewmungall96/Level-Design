@@ -25,6 +25,7 @@ public class Pipe : MonoBehaviour, IInteractable
 
     // Flag which indicates whether the pipe is rotating or not
     bool isRotating = false;
+    public bool IsRotating { get { return isRotating; } }
 
     // Command queue for rotations
     Queue<IEnumerator> rotateQueue = new Queue<IEnumerator>();
@@ -62,19 +63,17 @@ public class Pipe : MonoBehaviour, IInteractable
         {
             connections[i].parent = this;
         }
-        
+
+        MeshRenderer[] meshRend = GetComponentsInChildren<MeshRenderer>();
+
         // Temp behaviour on powered
         onPowered.AddListener(() => {
-            MeshRenderer[] meshRend = GetComponentsInChildren<MeshRenderer>();
-
             for (int i = 0; i < meshRend.Length; i++) {
                 meshRend[i].material.SetColor("_BaseColor", Color.green);
             }
         });
 
         onNotPowered.AddListener(() => {
-            MeshRenderer[] meshRend = GetComponentsInChildren<MeshRenderer>();
-
             for (int i = 0; i < meshRend.Length; i++)
             {
                 meshRend[i].material.SetColor("_BaseColor", Color.blue);
@@ -154,7 +153,7 @@ public class Pipe : MonoBehaviour, IInteractable
 
         // Smooth lerp to random rotation
         Quaternion sourceOrientation = transform.rotation;
-        Quaternion targetOrientation = sourceOrientation * Quaternion.Euler(0, 0, Random.Range(0, 360) * dir);
+        Quaternion targetOrientation = sourceOrientation * Quaternion.Euler(0, 0, Random.Range(0, 4) * 90 * dir);
 
         for (var t = 0f; t < 1f; t += Time.deltaTime * rotationSpeed)
         {

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -49,13 +50,13 @@ public class PipeSystem : MonoBehaviour {
         if (isPowered)
         {
             start.HasPower = true;
-            UpdatePipesStates();
         }
         else
         {
             start.HasPower = false;
-            UpdatePipesStates();
         }
+
+        UpdatePipesStates();
     }
 
     private void OnValidate()
@@ -143,33 +144,29 @@ public class PipeSystem : MonoBehaviour {
 
     public void Shuffle()
     {
-        SetPowered(false);
-        //// Clear power from pipes
+        //SetPowered(false);
+        ////// Clear power from pipes
+        ////for (int i = 0; i < pipes.Length; i++)
+        ////{
+        ////    pipes[i].HasPower = false;
+        ////}
+
+        //// Shuffle pipes - skipping the start and finish
         //for (int i = 0; i < pipes.Length; i++)
         //{
-        //    pipes[i].HasPower = false;
+        //    if (pipes[i] == start || pipes[i] == finish)
+        //        continue;
+
+        //    pipes[i].RotateRandomly(false, false);
         //}
 
-        // Shuffle pipes - skipping the start and finish
-        for (int i = 0; i < pipes.Length; i++)
-        {
-            if (pipes[i] == start || pipes[i] == finish)
-                continue;
-
-            pipes[i].RotateRandomly(false, false);
-        }
-
-        UpdatePipesStates();
+        //UpdatePipesStates();
+        StartCoroutine("ShuffleCoroutine");
     }
-    
+
     IEnumerator ShuffleCoroutine()
     {
         SetPowered(false);
-        //// Clear power from pipes
-        //for (int i = 0; i < pipes.Length; i++)
-        //{
-        //    pipes[i].HasPower = false;
-        //}
 
         yield return null;
 
@@ -181,6 +178,13 @@ public class PipeSystem : MonoBehaviour {
 
             pipes[i].RotateRandomly(false, false);
         }
+
+        while (pipes[0].IsRotating)
+        {
+            yield return null;
+        }
+
+        SetPowered(true);
 
         UpdatePipesStates();
     }
