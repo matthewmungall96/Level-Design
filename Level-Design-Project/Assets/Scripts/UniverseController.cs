@@ -72,12 +72,12 @@ public class UniverseController : MonoBehaviour
 			{
 				_cameras[i].fieldOfView = _fov.Evaluate(t);
 			}
-			_vingette.MinRadius = _innerVingette.Evaluate(t);
-			_vingette.MaxRadius = _outerVingette.Evaluate(t);
-			_vingette.Saturation = _saturation.Evaluate(t);
+			//_vingette.MinRadius = _innerVingette.Evaluate(t);
+			//_vingette.MaxRadius = _outerVingette.Evaluate(t);
+			//_vingette.Saturation = _saturation.Evaluate(t);
 			Time.timeScale = _timeScale.Evaluate(t);
 
-			_itemTransform.localPosition = new Vector3(-0.5f, -0.5f, _itemPosition.Evaluate(t));
+			//_itemTransform.localPosition = new Vector3(-0.5f, -0.5f, _itemPosition.Evaluate(t));
 
 			if (t > _swapTime && !_swapTiggered)
 			{
@@ -100,10 +100,10 @@ public class UniverseController : MonoBehaviour
 			_cameras[i].fieldOfView = _fov.Evaluate(1.0f);
 		}
 
-		_vingette.MinRadius = _innerVingette.Evaluate(1.0f);
-		_vingette.MaxRadius = _outerVingette.Evaluate(1.0f);
-		_vingette.Saturation = 1.0f;
-		_itemTransform.localPosition = new Vector3(-0.5f, -0.5f, 0.5f);
+		//_vingette.MinRadius = _innerVingette.Evaluate(1.0f);
+		//_vingette.MaxRadius = _outerVingette.Evaluate(1.0f);
+		//_vingette.Saturation = 1.0f;
+		//_itemTransform.localPosition = new Vector3(-0.5f, -0.5f, 0.5f);
 
 		Time.timeScale = 1.0f;
 
