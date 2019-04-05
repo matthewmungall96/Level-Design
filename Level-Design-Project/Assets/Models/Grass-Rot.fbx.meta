@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 65756b8ac0f22f24cba0ebfc325b8753
+guid: 3fb82361ff6d3da4caa58de307ed9d7a
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -11,7 +11,7 @@ ModelImporter:
     4300000: Grass Model
   externalObjects: {}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
