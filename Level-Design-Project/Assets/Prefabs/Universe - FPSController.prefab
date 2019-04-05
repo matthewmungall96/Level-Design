@@ -257,6 +257,8 @@ GameObject:
   - component: {fileID: 1482152868981236464}
   - component: {fileID: 1482152868979710064}
   - component: {fileID: 1482152869071398503}
+  - component: {fileID: 1948144465563339633}
+  - component: {fileID: 176301002}
   m_Layer: 0
   m_Name: Universe - FPSController
   m_TagString: Player
@@ -560,6 +562,34 @@ MonoBehaviour:
   DebugRay: 0
   DebugRayColor: {r: 0, g: 1, b: 0, a: 1}
   DebugRayColorAlpha: 1
+--- !u!114 &1948144465563339633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482152868975739280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de99a1b5b2d23d42b75c1ad8c5d6132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &176301002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482152868975739280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d60bf976c4c484b92c546ec774d61a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1482152868975739282
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,7 +768,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4063505623450816959}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.212, y: 0, z: 0.647}
+  m_LocalPosition: {x: -0.40900004, y: 0, z: 0.64699996}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 1482152867633180960}
@@ -831,7 +861,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8743384872017134647}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.212, y: 0, z: 0.651}
+  m_LocalPosition: {x: -0.409, y: 0, z: 0.651}
   m_LocalScale: {x: 0.35, y: 0.35, z: 1}
   m_Children: []
   m_Father: {fileID: 3829793924118468545}
