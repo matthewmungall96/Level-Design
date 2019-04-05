@@ -2,25 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace UniProject
 {
-    private static Player instance;
-
-    public static Player Instance { get { return instance; } }
-
-    public PlayerInteraction GetInteractionSystem { get; private set; }
-
-    private void Awake()
+    public class Player : MonoBehaviour
     {
-        if(instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
+        private static Player instance;
 
-        GetInteractionSystem = GetComponent<PlayerInteraction>();    
+        public static Player Instance { get { return instance; } }
+
+        public PlayerInteraction GetInteractionSystem { get; private set; }
+
+        private void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(this);
+            }
+
+            GetInteractionSystem = GetComponent<PlayerInteraction>();
+        }
     }
 }

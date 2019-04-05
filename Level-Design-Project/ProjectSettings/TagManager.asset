@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fire
+  - Universe-A
   layers:
   - Default
   - TransparentFX
@@ -17,9 +18,9 @@ TagManager:
   - PostProcessing
   - PipeConnector
   - Pipe
-  - 
-  - 
-  - 
+  - UniverseA
+  - UniverseB
+  - Depth Effect
   - 
   - 
   - 
