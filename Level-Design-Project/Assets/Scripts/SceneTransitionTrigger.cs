@@ -10,14 +10,17 @@ namespace UniProject
         [SerializeField] string baseTransitionScene;
 
         private void Awake()
+        {    
+            GetComponent<BoxCollider>().isTrigger = true;
+        }
+
+        private void Start()
         {
             if (GameManager.Instance == null)
             {
                 Debug.Log("Loading GameManager..");
                 GameManager.StartGameManagementScene();
             }
-
-            GetComponent<BoxCollider>().isTrigger = true;
         }
 
         private void OnTriggerEnter(Collider other)
