@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace UniProject
 {
@@ -8,7 +9,13 @@ namespace UniProject
     {
         private static GameManager instance;
 
-        public static GameManager Instance { get { return instance; } }
+        public static GameManager Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
 
         [SerializeField] int startingSceneIndex = 1;
 
@@ -33,7 +40,15 @@ namespace UniProject
         private void Start()
         {
             // Load in the starting level
-            GetSceneManager.AsyncLoadSceneAdditive(1);
+            if (!SceneManager.GetSceneByBuildIndex(1).isLoaded)
+                GetSceneManager.AsyncLoadSceneAdditive(1);
+            else
+                GetFadeOverlay.Fade(1);
+        }
+
+        public static void StartGameManagementScene()
+        {
+            SceneManager.LoadSceneAsync("GameManagement", LoadSceneMode.Additive);
         }
     }
 }
