@@ -10,6 +10,7 @@ namespace UniProject
     {
         private void Awake()
         {
+            currentScene = SceneManager.GetActiveScene();
             AreaData.onSpawn = (sceneData) => { SetAreaData(sceneData); };
         }
 
@@ -39,8 +40,6 @@ namespace UniProject
                 return;
 
             StartCoroutine("AsyncLoadSceneAdditiveCoroutine", sceneIndex);
-
-            currentScene = SceneManager.GetSceneByBuildIndex(sceneIndex);
         }
 
         IEnumerator AsyncLoadSceneAdditiveCoroutine(int sceneBuildIndex)
@@ -58,6 +57,8 @@ namespace UniProject
                 yield return StartCoroutine(WaitTillAsyncFinished(asyncSceneLoad));
             }
 
+            currentScene = SceneManager.GetSceneByBuildIndex(sceneBuildIndex);
+
             yield return GameManager.Instance.GetFadeOverlay.Fade(1);
 
             isTransitioning = false;
@@ -65,7 +66,7 @@ namespace UniProject
 
         public void AsyncFadeToScene(string sceneName)
         {
-            if (isTransitioning)
+            if (isTransitioning || string.IsNullOrEmpty(sceneName))
                 return;
 
             StartCoroutine("FadeToSceneCoroutine", sceneName);
@@ -73,7 +74,7 @@ namespace UniProject
 
         public void AsyncFadeToScene(int sceneIndex)
         {
-            if (isTransitioning)
+            if (isTransitioning || sceneIndex > SceneManager.sceneCountInBuildSettings - 1)
                 return;
 
             StartCoroutine("FadeToSceneCoroutine", sceneIndex);
@@ -94,6 +95,13 @@ namespace UniProject
             // Fade the scene out
             yield return GameManager.Instance.GetFadeOverlay.Fade(-1);
 
+            // Disable lights to remove dual direction light exception
+            var lights = GameObject.FindObjectsOfType<Light>();
+            foreach (Light light in lights)
+            {
+                light.enabled = false;
+            }
+
             string oldAlternativeTimeScene = currentAlternativeTimeScene;
 
             // Begin loading the scene asynchronously
@@ -110,10 +118,11 @@ namespace UniProject
             }
 
             // Unload new scene if it's not the same as current
-            asyncSceneLoad = SceneManager.UnloadSceneAsync(currentScene.buildIndex);
-            
-            // Wait for currentScene to unload
-            yield return StartCoroutine(WaitTillAsyncFinished(asyncSceneLoad));
+            if (currentScene.IsValid() && currentScene.isLoaded)
+            {
+                asyncSceneLoad = SceneManager.UnloadSceneAsync(currentScene.buildIndex);
+                yield return StartCoroutine(WaitTillAsyncFinished(asyncSceneLoad));
+            }
 
             // Unload alternative scene if loaded
             if(!string.IsNullOrEmpty(oldAlternativeTimeScene))
@@ -121,6 +130,8 @@ namespace UniProject
                 asyncSceneLoad = SceneManager.UnloadSceneAsync(oldAlternativeTimeScene);
                 yield return StartCoroutine(WaitTillAsyncFinished(asyncSceneLoad));
             }
+
+            yield return new WaitForSeconds(1);
 
             // Fade the scene back in
             yield return GameManager.Instance.GetFadeOverlay.Fade(1);
@@ -138,6 +149,13 @@ namespace UniProject
             // Fade the scene out
             yield return GameManager.Instance.GetFadeOverlay.Fade(-1);
 
+            // Disable lights to remove dual direction light exception
+            var lights = GameObject.FindObjectsOfType<Light>();
+            foreach(Light light in lights)
+            {
+                light.enabled = false;
+            }
+
             string oldAlternativeTimeScene = currentAlternativeTimeScene;
 
             // Begin loading the scene asynchronously
@@ -154,8 +172,11 @@ namespace UniProject
             }
 
             // Unload old scene and wait for it to finish
-            asyncSceneLoad = SceneManager.UnloadSceneAsync(currentScene.buildIndex);
-            yield return StartCoroutine(WaitTillAsyncFinished(asyncSceneLoad));
+            if (currentScene.IsValid() && currentScene.isLoaded)
+            {
+                asyncSceneLoad = SceneManager.UnloadSceneAsync(currentScene.buildIndex);
+                yield return StartCoroutine(WaitTillAsyncFinished(asyncSceneLoad));
+            }
 
             // Unload alternative scene if loaded
             if (!string.IsNullOrEmpty(oldAlternativeTimeScene))
@@ -163,6 +184,8 @@ namespace UniProject
                 asyncSceneLoad = SceneManager.UnloadSceneAsync(oldAlternativeTimeScene);
                 yield return StartCoroutine(WaitTillAsyncFinished(asyncSceneLoad));
             }
+
+            yield return new WaitForSeconds(1);
 
             // Fade the scene back in
             yield return GameManager.Instance.GetFadeOverlay.Fade(1);
