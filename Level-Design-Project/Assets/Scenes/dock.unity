@@ -3834,7 +3834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff16184495c6214cb3fbfe7c440a787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseTransitionScene: Waterworks-Transition
+  baseTransitionScene: water-works-environment
 --- !u!65 &206209220
 BoxCollider:
   m_ObjectHideFlags: 0
