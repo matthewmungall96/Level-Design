@@ -30,7 +30,7 @@ public class PlayerInteraction : MonoBehaviour {
         if (leftClicked || Input.GetMouseButtonDown(1))
         {
             // Select appropriate ray
-            if (UseMousePosition)
+            if (!UseMousePosition)
             { 
                 ray = rayCam.ScreenPointToRay(new Vector3(halfScreenWidth, halfScreenHeight, 0));
             }
