@@ -137,7 +137,7 @@ namespace UniProject
             yield return GameManager.Instance.GetFadeOverlay.Fade(1);
 
             // Cache a reference to the newly loaded scene
-            currentScene = SceneManager.GetSceneByName("sceneName");
+            currentScene = SceneManager.GetSceneByName(sceneName);
 
             isTransitioning = false;
         }

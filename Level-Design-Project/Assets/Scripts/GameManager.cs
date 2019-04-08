@@ -17,6 +17,9 @@ namespace UniProject
             }
         }
 
+        public static bool loadCalled = false;
+        public static bool loadFromStart = true;
+
         [SerializeField] int startingSceneIndex = 1;
 
         private void Awake()
@@ -40,15 +43,29 @@ namespace UniProject
         private void Start()
         {
             // Load in the starting level
-            if (!SceneManager.GetSceneByBuildIndex(1).isLoaded)
+            if (loadFromStart)
+            {
                 GetSceneManager.AsyncLoadSceneAdditive(1);
+            }
             else
                 GetFadeOverlay.Fade(1);
         }
 
         public static void StartGameManagementScene()
         {
-            SceneManager.LoadSceneAsync("GameManagement", LoadSceneMode.Additive);
+            if (loadCalled)
+                return;
+
+            loadFromStart = false;
+            loadCalled = true;
+
+            if(!SceneManager.GetSceneByName("GameManagement").isLoaded)
+                SceneManager.LoadSceneAsync("GameManagement", LoadSceneMode.Additive);
+        }
+
+        public void InitialSequence()
+        {
+
         }
     }
 }
