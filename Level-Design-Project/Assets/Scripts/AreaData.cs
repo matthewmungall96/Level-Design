@@ -13,7 +13,8 @@ namespace UniProject
 
         private void Awake()
         {
-            onSpawn.Invoke(alterativeTimeSceneName);
+            if(onSpawn != null)
+                onSpawn.Invoke(alterativeTimeSceneName);
         }
     }
 }
