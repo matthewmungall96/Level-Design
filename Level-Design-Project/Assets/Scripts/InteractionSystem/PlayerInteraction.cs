@@ -25,9 +25,9 @@ public class PlayerInteraction : MonoBehaviour {
 	
 	void Update () {
 
-        bool leftClicked = Input.GetMouseButtonDown(0);
+        bool rightClicked = Input.GetMouseButtonDown(0);
 
-        if (leftClicked || Input.GetMouseButtonDown(1))
+        if (rightClicked || Input.GetMouseButtonDown(1))
         {
             // Select appropriate ray
             if (!UseMousePosition)
@@ -45,7 +45,7 @@ public class PlayerInteraction : MonoBehaviour {
 
                 if (interactable != null)
                 {
-                    interactable.OnInteract(leftClicked);
+                    interactable.OnInteract(rightClicked);
                 }
             }
         }

@@ -40,10 +40,10 @@ public class UniverseController : MonoBehaviour
 
 	void Awake()
 	{
-        if (string.IsNullOrEmpty(_sceneToLoad))
-            Destroy(this);
+        //if (string.IsNullOrEmpty(_sceneToLoad))
+        //    Destroy(this);
 
-		SceneManager.LoadScene(_sceneToLoad, LoadSceneMode.Additive);
+		//SceneManager.LoadScene(_sceneToLoad, LoadSceneMode.Additive);
 		_audio = GetComponent<AudioSource>();
 	}
 
@@ -55,8 +55,10 @@ public class UniverseController : MonoBehaviour
 
 	void Update()
 	{
+        Debug.Log("Look at the console matt.");
 		if (!Swapping && Input.GetMouseButtonDown(0))
 		{
+            Debug.Log("Fov Kick");
 			StartCoroutine(SwapAsync());
 		}
 	}
