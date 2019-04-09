@@ -266,19 +266,12 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.4191176, g: 0.4191176, b: 0.4191176, a: 1}
-<<<<<<< HEAD
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-=======
->>>>>>> b5fcd53bf331c75371c75b80a8798c1ded254a3b
     - _Color: {r: 0.41911757, g: 0.41911757, b: 0.41911757, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
-<<<<<<< HEAD
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 0}
-=======
-    - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
->>>>>>> b5fcd53bf331c75371c75b80a8798c1ded254a3b
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
