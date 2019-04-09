@@ -10,6 +10,8 @@ public class UniverseController : MonoBehaviour
 		get; private set;
 	}
 
+    [SerializeField]
+    private string _sceneToLoad;
 	[SerializeField]
 	private TwinCameraController _twinCameras;
 	[Header("Swap Effect Stuff")]
@@ -38,7 +40,10 @@ public class UniverseController : MonoBehaviour
 
 	void Awake()
 	{
-		SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        if (string.IsNullOrEmpty(_sceneToLoad))
+            Destroy(this);
+
+		SceneManager.LoadScene(_sceneToLoad, LoadSceneMode.Additive);
 		_audio = GetComponent<AudioSource>();
 	}
 
