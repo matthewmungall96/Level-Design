@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Universe B/Observatory-B.unity
     guid: c702a73b6037c0f42bd8562e3c6042db
+  - enabled: 1
+    path: Assets/Scenes/GameManagement.unity
+    guid: 7ab167a1ff3fb294c863a589edc551df
   m_configObjects: {}
