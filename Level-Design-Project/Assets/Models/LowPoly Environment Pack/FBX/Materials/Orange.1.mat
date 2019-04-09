@@ -265,7 +265,6 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.6911764, g: 0.35210538, b: 0.14738321, a: 1}
-    - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0.69117635, g: 0.35210535, b: 0.14738318, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
