@@ -63,7 +63,7 @@ Camera:
   m_Depth: 0.9
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 36864
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   renderingPath: 0
   volumeLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 36864
   volumeAnchorOverride: {fileID: 0}
   aperture: 8
   shutterSpeed: 0.005
@@ -629,7 +629,7 @@ Camera:
   m_Depth: 0.9
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 34816
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -668,7 +668,7 @@ MonoBehaviour:
   renderingPath: 0
   volumeLayerMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 34816
   volumeAnchorOverride: {fileID: 0}
   aperture: 8
   shutterSpeed: 0.005
@@ -756,7 +756,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4063505623450816959}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.40900004, y: 0, z: 0.64699996}
+  m_LocalPosition: {x: -0.31, y: 0, z: 0.6}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 3546018919910458447}
@@ -990,7 +990,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1025,16 +1025,16 @@ MonoBehaviour:
   clearColorMode: 2
   backgroundColorHDR: {r: 0.025, g: 0.07, b: 0.19, a: 0}
   clearDepth: 1
-  renderingPath: 0
+  renderingPath: 1
   volumeLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8192
   volumeAnchorOverride: {fileID: 0}
   aperture: 8
   shutterSpeed: 0.005
   iso: 400
   m_FrameSettings:
-    overrides: 0
+    overrides: 67108864
     enableShadow: 1
     enableContactShadows: 1
     enableShadowMask: 1
@@ -1060,7 +1060,7 @@ MonoBehaviour:
     enablePostprocess: 1
     enableOpaqueObjects: 1
     enableTransparentObjects: 1
-    enableRealtimePlanarReflection: 1
+    enableRealtimePlanarReflection: 0
     enableMSAA: 0
     enableAsyncCompute: 1
     runLightListAsync: 1

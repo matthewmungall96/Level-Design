@@ -213,6 +213,13 @@ namespace UniProject
 
         private IEnumerator LoadAlternateCoroutine(AreaData areaData, Action onComplete)
         {
+            if (string.IsNullOrEmpty(areaData.alterativeTimeSceneName))
+            {
+                onComplete.Invoke();
+
+                yield break;
+            }
+
             yield return null;
 
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(areaData.alterativeTimeSceneName, LoadSceneMode.Additive);

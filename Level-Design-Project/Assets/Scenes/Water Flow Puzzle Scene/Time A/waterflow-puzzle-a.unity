@@ -51,7 +51,7 @@ LightmapSettings:
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 1
+    m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
     serializedVersion: 10
@@ -88,7 +88,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: e40f134538256b14ba0c1ec8c9fd19e2,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -2022,6 +2023,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6987342696894737657, guid: 0744b6c33fb9e204786abc1e3c05a157,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6986926060444345997, guid: 0744b6c33fb9e204786abc1e3c05a157,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2041,6 +2047,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: UniverseTransformSyncer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987342696905120528, guid: 0744b6c33fb9e204786abc1e3c05a157,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987342697477096468, guid: 0744b6c33fb9e204786abc1e3c05a157,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987342697907090139, guid: 0744b6c33fb9e204786abc1e3c05a157,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987342698123014133, guid: 0744b6c33fb9e204786abc1e3c05a157,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987342698593548232, guid: 0744b6c33fb9e204786abc1e3c05a157,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987342698677687362, guid: 0744b6c33fb9e204786abc1e3c05a157,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7375593159590895836, guid: 0744b6c33fb9e204786abc1e3c05a157,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7000779473900273915, guid: 0744b6c33fb9e204786abc1e3c05a157,
         type: 3}
