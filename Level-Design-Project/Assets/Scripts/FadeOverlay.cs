@@ -27,11 +27,15 @@ public class FadeOverlay : MonoBehaviour
         return (direction < 0) ? StartCoroutine("FadeOut") : StartCoroutine("FadeIn");
     }
 
-    public IEnumerator FadeOut()
+    private IEnumerator FadeOut()
     {
+        Color color = overlayImg.color;
+        color.a = 1;
+        overlayImg.color = color;
+
         for (float i = 0; i < fadeDuration; i += Time.deltaTime)
         {
-            Color color = overlayImg.color;
+            color = overlayImg.color;
             color.a = fadeOutCurve.Evaluate(1 - i / fadeDuration);
             overlayImg.color = color;
 
@@ -39,11 +43,15 @@ public class FadeOverlay : MonoBehaviour
         }
     }
 
-    public IEnumerator FadeIn()
+    private IEnumerator FadeIn()
     {
+        Color color = overlayImg.color;
+        color.a = 0;
+        overlayImg.color = color;
+
         for (float i = 0; i < fadeDuration; i += Time.deltaTime)
         {
-            Color color = overlayImg.color;
+            color = overlayImg.color;
             color.a = fadeOutCurve.Evaluate(i / fadeDuration);
             overlayImg.color = color;
 

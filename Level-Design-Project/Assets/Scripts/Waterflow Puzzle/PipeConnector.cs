@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class PipeConnector : MonoBehaviour
 {
-    //[HideInInspector]
+    [HideInInspector]
     public Pipe parent;
-    //[HideInInspector] 
+    [HideInInspector] 
     public PipeConnector connected;
+    [HideInInspector]
+    public LayerMask collisionMask;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        connected = other.GetComponent<PipeConnector>();
+        if (collisionMask == (collisionMask | (1 << other.gameObject.layer)))
+        {
+            connected = other.GetComponent<PipeConnector>();
+        }
     }
 
     private void OnTriggerExit(Collider other)

@@ -33,14 +33,42 @@ public class PipeSystem : MonoBehaviour {
 
         for(int i = 0; i < pipes.Length; i++)
         {
-            pipes[i].onRotate = UpdatePipesStates;
-            pipes[i].onRotateCompleted = ()=> UpdatePipesStates();
+            pipes[i].onRotate += UpdatePipesStates;
+            pipes[i].onRotateCompleted += ()=> UpdatePipesStates();
         }
 
         SetPipeRotationSpeed(pipeRotationSpeed, pipes);
 
+        AsyncUpdatePipeConnectors();
+
         // Update powered state
         SetPowered(isPowered);
+    }
+
+    private void AsyncUpdatePipeConnectors()
+    {
+        StartCoroutine(UpdatePipeConnectorsCoroutine());
+    }
+
+    private IEnumerator UpdatePipeConnectorsCoroutine()
+    {
+        Vector3 tempPos;
+
+        // Loop over all pipes
+        for (int i = 0; i < pipes.Length; i++)
+        {
+            // Move Pipe to Narnia
+            tempPos = pipes[i].transform.position;
+            pipes[i].transform.position = new Vector3(0, 99999, 0);
+
+            // Wait a frame to allow pipe connector collision to update
+            yield return null;
+
+            pipes[i].transform.position = tempPos;
+
+            // Wait a frame
+            yield return null;
+        }
     }
 
     public void SetPowered(bool powered)
@@ -106,7 +134,7 @@ public class PipeSystem : MonoBehaviour {
         }
     }
 
-    private void UpdatePipesStates(Pipe skipPipe = null)
+    public void UpdatePipesStates(Pipe skipPipe = null)
     {
         // Empty powered pipes list
         poweredPipes.Clear();
@@ -144,22 +172,6 @@ public class PipeSystem : MonoBehaviour {
 
     public void Shuffle()
     {
-        //SetPowered(false);
-        ////// Clear power from pipes
-        ////for (int i = 0; i < pipes.Length; i++)
-        ////{
-        ////    pipes[i].HasPower = false;
-        ////}
-
-        //// Shuffle pipes - skipping the start and finish
-        //for (int i = 0; i < pipes.Length; i++)
-        //{
-        //    if (pipes[i] == start || pipes[i] == finish)
-        //        continue;
-
-        //    pipes[i].RotateRandomly(false, false);
-        //}
-
         //UpdatePipesStates();
         StartCoroutine("ShuffleCoroutine");
     }

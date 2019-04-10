@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Fire
   - Universe-A
+  - Pipe-Connector
+  - UniverseTransformSyncer
   layers:
   - Default
   - TransparentFX
@@ -16,12 +18,12 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - PipeConnector
+  - PipeConnector-a
   - Pipe
   - UniverseA
   - UniverseB
   - Depth Effect
-  - 
+  - PipeConnector-b
   - 
   - 
   - 

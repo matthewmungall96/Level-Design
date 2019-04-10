@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Pipe : MonoBehaviour, IInteractable
 {
     // Pipe connection points - Colliders
+    [HideInInspector]
     public PipeConnector[] connections;
 
     // Event called when rotation has completed
@@ -50,10 +51,15 @@ public class Pipe : MonoBehaviour, IInteractable
         }
     }
 
+    // Reference to pipe system
+    public PipeSystem ParentPipeSystem { get; private set; }
+
     public bool IsLocked { get; set; }
 
-    void Start()
+    void Awake()
     {
+        ParentPipeSystem = GetComponentInParent<PipeSystem>();
+        
         onNotPowered = onNotPowered ?? new UnityEvent();
         onPowered = onPowered ?? new UnityEvent();
 
@@ -68,7 +74,8 @@ public class Pipe : MonoBehaviour, IInteractable
 
         // Temp behaviour on powered
         onPowered.AddListener(() => {
-            for (int i = 0; i < meshRend.Length; i++) {
+            for (int i = 0; i < meshRend.Length; i++)
+            {
                 meshRend[i].material.SetColor("_BaseColor", Color.green);
             }
         });

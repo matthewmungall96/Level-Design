@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -26,6 +28,8 @@ namespace UniProject
 
         Scene currentScene;
         public static string currentAlternativeTimeScene;
+
+        public UnityEvent onSceneMerged;
 
         bool isTransitioning = false;
 
@@ -55,6 +59,8 @@ namespace UniProject
             {
                 asyncSceneLoad = SceneManager.LoadSceneAsync(currentAlternativeTimeScene, LoadSceneMode.Additive);
                 yield return StartCoroutine(WaitTillAsyncFinished(asyncSceneLoad));
+
+                SceneManager.MergeScenes(SceneManager.GetSceneByName(currentAlternativeTimeScene), SceneManager.GetSceneByBuildIndex(sceneBuildIndex));
             }
 
             currentScene = SceneManager.GetSceneByBuildIndex(sceneBuildIndex);
@@ -115,6 +121,8 @@ namespace UniProject
             {
                 asyncSceneLoad = SceneManager.LoadSceneAsync(currentAlternativeTimeScene, LoadSceneMode.Additive);
                 yield return StartCoroutine(WaitTillAsyncFinished(asyncSceneLoad));
+
+                SceneManager.MergeScenes(SceneManager.GetSceneByName(currentAlternativeTimeScene), SceneManager.GetSceneByName(sceneName));
             }
 
             // Unload new scene if it's not the same as current
@@ -125,11 +133,11 @@ namespace UniProject
             }
 
             // Unload alternative scene if loaded
-            if(!string.IsNullOrEmpty(oldAlternativeTimeScene))
-            {
-                asyncSceneLoad = SceneManager.UnloadSceneAsync(oldAlternativeTimeScene);
-                yield return StartCoroutine(WaitTillAsyncFinished(asyncSceneLoad));
-            }
+            //if (!string.IsNullOrEmpty(oldAlternativeTimeScene))
+            //{
+            //    asyncSceneLoad = SceneManager.UnloadSceneAsync(oldAlternativeTimeScene);
+            //    yield return StartCoroutine(WaitTillAsyncFinished(asyncSceneLoad));
+            //}
 
             yield return new WaitForSeconds(1);
 
@@ -169,6 +177,8 @@ namespace UniProject
             {
                 asyncSceneLoad = SceneManager.LoadSceneAsync(currentAlternativeTimeScene, LoadSceneMode.Additive);
                 yield return StartCoroutine(WaitTillAsyncFinished(asyncSceneLoad));
+
+                SceneManager.MergeScenes(SceneManager.GetSceneByName(currentAlternativeTimeScene), SceneManager.GetSceneByBuildIndex(sceneBuildIndex));
             }
 
             // Unload old scene and wait for it to finish
@@ -179,11 +189,11 @@ namespace UniProject
             }
 
             // Unload alternative scene if loaded
-            if (!string.IsNullOrEmpty(oldAlternativeTimeScene))
-            {
-                asyncSceneLoad = SceneManager.UnloadSceneAsync(oldAlternativeTimeScene);
-                yield return StartCoroutine(WaitTillAsyncFinished(asyncSceneLoad));
-            }
+            //if (!string.IsNullOrEmpty(oldAlternativeTimeScene))
+            //{
+            //    asyncSceneLoad = SceneManager.UnloadSceneAsync(oldAlternativeTimeScene);
+            //    yield return StartCoroutine(WaitTillAsyncFinished(asyncSceneLoad));
+            //}
 
             yield return new WaitForSeconds(1);
 
@@ -194,6 +204,30 @@ namespace UniProject
             currentScene = SceneManager.GetSceneByBuildIndex(sceneBuildIndex);
 
             isTransitioning = false;
+        }
+
+        public void AsyncLoadAlternate(AreaData areaData, Action onComplete)
+        {
+            StartCoroutine(LoadAlternateCoroutine(areaData, onComplete));
+        }
+
+        private IEnumerator LoadAlternateCoroutine(AreaData areaData, Action onComplete)
+        {
+            yield return null;
+
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(areaData.alterativeTimeSceneName, LoadSceneMode.Additive);
+
+            yield return StartCoroutine(WaitTillAsyncFinished(asyncLoad));
+
+            SceneManager.MergeScenes(SceneManager.GetSceneByName(areaData.alterativeTimeSceneName), currentScene);
+
+            yield return null;
+
+            onSceneMerged.Invoke();
+
+            yield return null;
+
+            onComplete.Invoke();
         }
     }
 }
