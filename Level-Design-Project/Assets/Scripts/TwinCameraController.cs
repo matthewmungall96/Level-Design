@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.PostProcessing;
 
 public class TwinCameraController : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class TwinCameraController : MonoBehaviour
         _activeCamera = _hiddenCamera;
         _hiddenCamera = swapCamera;
 
+        //_activeCamera.GetComponent<PostProcessLayer>().Init(_activeCamera.GetComponent<PostProcessLayer>()
         DoDepthHack();
     }
 
