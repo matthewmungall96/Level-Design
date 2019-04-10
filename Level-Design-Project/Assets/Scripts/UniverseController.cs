@@ -102,7 +102,7 @@ public class UniverseController : MonoBehaviour
 		}
 
 		// technically a huge lag spike could cause this to be missed in the coroutine so double check it here.
-		if (!_swapTiggered)
+		while (!_swapTiggered)
 		{
 			_swapTiggered = true;
 			_twinCameras.SwapCameras();
