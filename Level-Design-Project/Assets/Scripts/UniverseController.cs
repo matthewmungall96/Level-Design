@@ -56,7 +56,8 @@ public class UniverseController : MonoBehaviour
 	void Update()
 	{
         Debug.Log("Look at the console matt.");
-		if (!Swapping && Input.GetMouseButtonDown(0))
+        Debug.Log("Well played, Stephen, well played.");
+        if (!Swapping && Input.GetMouseButtonDown(0))
 		{
             Debug.Log("Fov Kick");
 			StartCoroutine(SwapAsync());
