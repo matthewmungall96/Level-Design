@@ -48,7 +48,20 @@ namespace UniProject
                 GetSceneManager.AsyncLoadSceneAdditive(1);
             }
             else
-                GetFadeOverlay.Fade(1);
+            {
+                var areaData = GameObject.FindObjectOfType<AreaData>();
+
+                // Load alternative time scene if specified in an AreaData object
+                if (areaData != null)
+                {
+                    GetSceneManager.AsyncLoadAlternate(areaData, () =>
+                    {
+                        GetFadeOverlay.Fade(1);
+                    });
+                }
+                else
+                    GetFadeOverlay.Fade(1);
+            }
         }
 
         public static void StartGameManagementScene()
@@ -68,4 +81,6 @@ namespace UniProject
 
         }
     }
+
+
 }

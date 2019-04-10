@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 54041898363773790}
   m_Layer: 9
   m_Name: Connector (3)
-  m_TagString: Untagged
+  m_TagString: Pipe-Connector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 54520395333519360}
   m_Layer: 9
   m_Name: Connector (2)
-  m_TagString: Untagged
+  m_TagString: Pipe-Connector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

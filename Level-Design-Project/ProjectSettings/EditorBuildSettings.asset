@@ -6,12 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Universe A/Observatory-A.unity
-    guid: d2000e8375792a14295a8573565e5a05
-  - enabled: 1
-    path: Assets/Scenes/Universe B/Observatory-B.unity
-    guid: c702a73b6037c0f42bd8562e3c6042db
-  - enabled: 1
     path: Assets/Scenes/GameManagement.unity
     guid: 7ab167a1ff3fb294c863a589edc551df
+  - enabled: 1
+    path: Assets/Scenes/Water Flow Puzzle Scene/Time A/waterflow-puzzle-a.unity
+    guid: dea4c5ed45ae1204da77b306e2763be3
+  - enabled: 1
+    path: Assets/Scenes/Water Flow Puzzle Scene/Time B/waterflow-puzzle-b.unity
+    guid: c0c24793836bb0a4eb4bad91c1f5dea6
+  - enabled: 1
+    path: Assets/Scenes/Water Flow Puzzle Transition Test/Time A/waterflow-puzzle-transition-a.unity
+    guid: f441b937c6df7d5478b67d493419377b
+  - enabled: 1
+    path: Assets/Scenes/Water Flow Puzzle Transition Test/Time B/waterflow-puzzle-transition-b.unity
+    guid: 64f0d65e79c934e4d9f3eee101588cda
   m_configObjects: {}

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UniProject;
+using UnityEngine.Events;
 
 public class UniverseController : MonoBehaviour
 {
@@ -10,8 +12,6 @@ public class UniverseController : MonoBehaviour
 		get; private set;
 	}
 
-    [SerializeField]
-    private string _sceneToLoad;
 	[SerializeField]
 	private TwinCameraController _twinCameras;
 	[Header("Swap Effect Stuff")]
@@ -33,19 +33,23 @@ public class UniverseController : MonoBehaviour
 	private Transform _itemTransform;
 	[SerializeField]
 	private AnimationCurve _itemPosition;
+    [SerializeField]
+    private KeyCode SwapInput = KeyCode.E;
 
 	private AudioSource _audio;
 	private bool _swapTiggered;
 	private readonly float _swapTime = 0.85f;
 
+    [HideInInspector]
+    public Universes currentUniverse;
+
+    public static OnUniverseChanged onUniverseChanged;
+
 	void Awake()
 	{
-        //if (string.IsNullOrEmpty(_sceneToLoad))
-        //    Destroy(this);
-
-		//SceneManager.LoadScene(_sceneToLoad, LoadSceneMode.Additive);
 		_audio = GetComponent<AudioSource>();
-	}
+        currentUniverse = Universes.A;
+    }
 
 	void SwapUniverses()
 	{
@@ -55,10 +59,8 @@ public class UniverseController : MonoBehaviour
 
 	void Update()
 	{
-        Debug.Log("Look at the console matt.");
-		if (!Swapping && Input.GetMouseButtonDown(0))
+		if (!Swapping && Input.GetKeyDown(SwapInput))
 		{
-            Debug.Log("Fov Kick");
 			StartCoroutine(SwapAsync());
 		}
 	}
@@ -90,6 +92,10 @@ public class UniverseController : MonoBehaviour
 			{
 				_swapTiggered = true;
 				_twinCameras.SwapCameras();
+
+                // Toggle the current universe indicator
+                currentUniverse = (currentUniverse == Universes.A) ? Universes.B : Universes.A;
+                onUniverseChanged.Invoke((int)currentUniverse);
 			}
 
 			yield return null;
@@ -100,9 +106,13 @@ public class UniverseController : MonoBehaviour
 		{
 			_swapTiggered = true;
 			_twinCameras.SwapCameras();
-		}
 
-		for (int i = 0; i < _cameras.Length; i++)
+            // Toggle the current universe indicator
+            currentUniverse = (currentUniverse == Universes.A) ? Universes.B : Universes.A;
+            onUniverseChanged.Invoke((int)currentUniverse);
+        }
+
+        for (int i = 0; i < _cameras.Length; i++)
 		{
 			_cameras[i].fieldOfView = _fov.Evaluate(1.0f);
 		}
@@ -116,4 +126,16 @@ public class UniverseController : MonoBehaviour
 
 		Swapping = false;
 	}
+}
+
+// Warning: Only set up for 2 universes, adding more won't work
+public enum Universes
+{
+    A,
+    B
+}
+
+// Event Class to expose unity event to inspector
+public class OnUniverseChanged : UnityEvent<int>
+{
 }
