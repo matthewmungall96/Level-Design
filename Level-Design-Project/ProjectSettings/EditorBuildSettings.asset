@@ -8,10 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameManagement.unity
     guid: 7ab167a1ff3fb294c863a589edc551df
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Dock Scene/Dock A/dock-a.unity
     guid: 84d0d506745c44041a7dce5de6f41da3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Dock Scene/Dock B/dock-b.unity
     guid: f4eacb6cec5ed4f44811119b523cc80f
+  - enabled: 1
+    path: Assets/Scenes/Observatory Scene/Universe A/Observatory-A.unity
+    guid: d2000e8375792a14295a8573565e5a05
+  - enabled: 0
+    path: Assets/Scenes/Observatory Scene/Universe B/Observatory-B.unity
+    guid: 6181245fc1e535546ba678a21051fbe4
   m_configObjects: {}
