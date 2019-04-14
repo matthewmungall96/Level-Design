@@ -18,7 +18,12 @@ public class PipeSystemEditor : Editor
         if (GUILayout.Button("Set Universe B"))
         {
             SetUniverse(pipeSystem.transform, "UniverseB", "PipeConnector-b");
-        }   
+        }
+
+        if (GUILayout.Button("Set Universe AB"))
+        {
+            SetUniverse(pipeSystem.transform, "UniverseAB", "PipeConnector-ab");
+        }
     }
 
     private void SetUniverse(Transform rootTransform, string universeLayer, string universeConnectorLayer)

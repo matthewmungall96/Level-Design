@@ -85,6 +85,7 @@ GameObject:
   - component: {fileID: 1486482003977799901}
   - component: {fileID: 6320395967304558143}
   - component: {fileID: 7558609973766407356}
+  - component: {fileID: 3430888899386771802}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -130,6 +131,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 734835a3c033f39438f83d5c573a201f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSceneMerged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &3430888899386771802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105485761781787318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37ea2e460a4fd2342a1472a4a61eeb19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8394012954955498732

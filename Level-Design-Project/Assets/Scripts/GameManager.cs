@@ -35,10 +35,12 @@ namespace UniProject
 
             GetSceneManager = GetComponentInChildren<CustomSceneManager>();
             GetFadeOverlay = GetComponentInChildren<FadeOverlay>();
+            GetPersistedLevelData = GetComponent<PersistedLevelData>();
         }
 
         public CustomSceneManager GetSceneManager { get; private set; }
         public FadeOverlay GetFadeOverlay { get; private set; }
+        public PersistedLevelData GetPersistedLevelData { get; private set; }
 
         private void Start()
         {
@@ -74,11 +76,6 @@ namespace UniProject
 
             if(!SceneManager.GetSceneByName("GameManagement").isLoaded)
                 SceneManager.LoadSceneAsync("GameManagement", LoadSceneMode.Additive);
-        }
-
-        public void InitialSequence()
-        {
-
         }
     }
 

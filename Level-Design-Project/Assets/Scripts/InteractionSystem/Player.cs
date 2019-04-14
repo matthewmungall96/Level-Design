@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 namespace UniProject
 {
@@ -11,6 +12,7 @@ namespace UniProject
         public static Player Instance { get { return instance; } }
 
         public PlayerInteraction GetInteractionSystem { get; private set; }
+        public FirstPersonController GetFirstPersonController { get; private set; }
 
         private void Awake()
         {
@@ -24,6 +26,7 @@ namespace UniProject
             }
 
             GetInteractionSystem = GetComponent<PlayerInteraction>();
+            GetFirstPersonController = GetComponent<FirstPersonController>();
         }
     }
 }
