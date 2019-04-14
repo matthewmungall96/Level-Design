@@ -8,7 +8,7 @@ public class PipeConnector : MonoBehaviour
     public Pipe parent;
     [HideInInspector] 
     public PipeConnector connected;
-    [HideInInspector]
+    [SerializeField]
     public LayerMask collisionMask;
 
     private void OnTriggerStay(Collider other)
