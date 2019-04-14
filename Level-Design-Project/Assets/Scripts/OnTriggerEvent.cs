@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(BoxCollider))]
 public class OnTriggerEvent : MonoBehaviour
 {
     public UnityEvent onTriggered;

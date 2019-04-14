@@ -16,5 +16,15 @@ namespace UniProject
             if(onSpawn != null)
                 onSpawn.Invoke(alterativeTimeSceneName);
         }
+
+        public void SetWaterworksPowered()
+        {
+            GameManager.Instance.GetPersistedLevelData.WaterworksPowered = true;
+        }
+
+        public void SetObservatoryPowered()
+        {
+            GameManager.Instance.GetPersistedLevelData.ObservatoryPowered = true;
+        }
     }
 }

@@ -49,7 +49,7 @@ public class PlayerInteraction : MonoBehaviour {
 
             if (universeController.currentUniverse == Universes.A)
                 TryRayInteraction(universeALayerMask, leftClicked);
-            else if (universeController.currentUniverse == Universes.B)
+            else if (universeController.currentUniverse == Universes.A)
                 TryRayInteraction(universeBLayerMask, leftClicked);
         }
 	}
