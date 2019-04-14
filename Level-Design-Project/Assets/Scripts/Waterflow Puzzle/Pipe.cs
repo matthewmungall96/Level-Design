@@ -47,7 +47,16 @@ public class Pipe : MonoBehaviour, IInteractable
         {
             hasPower = value;
 
-            if (hasPower) onPowered.Invoke(); else onNotPowered.Invoke();
+            if (hasPower)
+            {
+                Debug.Log("Powered", gameObject);
+                onPowered.Invoke();
+            }
+            else
+            {
+                onNotPowered.Invoke();
+                Debug.Log("Unpowered", gameObject);
+            }
         }
     }
 
@@ -92,20 +101,21 @@ public class Pipe : MonoBehaviour, IInteractable
     void Rotate(int dir)
     {
         // Queue the action if a rotation is taking place, else start the rotation
-        if(isRotating)
+        if (isRotating)
         {
             rotateQueue.Enqueue(RotateCoroutine(dir));
         }
         else
         {
+            isRotating = true;
             StartCoroutine("RotateCoroutine", dir);
+
         }
     }
 
     IEnumerator RotateCoroutine(int dir)
     {
-        isRotating = true;
-
+        Debug.Log("Rotate Coroutine called.");
         onRotate.Invoke(this);
 
         // Smooth lerp to target rotation
@@ -122,8 +132,6 @@ public class Pipe : MonoBehaviour, IInteractable
         // Snap to final rotation
         transform.rotation = targetOrientation;     
 
-        isRotating = false;
-
         // Start the next rotation if one queued, otherwise trigger the on rotate completed event
         if (rotateQueue.Count > 0)
         {
@@ -131,7 +139,12 @@ public class Pipe : MonoBehaviour, IInteractable
         }
         else
         {
-            onRotateCompleted.Invoke();
+            while (isRotating)
+            {
+                Debug.Log("OnRotateComplete called. onRotateCompleted " + onRotateCompleted.ToString());
+                onRotateCompleted.Invoke();
+                isRotating = false;
+            }
         }
     }
 
@@ -144,16 +157,17 @@ public class Pipe : MonoBehaviour, IInteractable
         }
         else
         {
+            isRotating = true;
             StartCoroutine(RotateRandomlyCoroutine(sendOnRotateEvent, sendOnCompleteEvent));
         }
     }
 
     IEnumerator RotateRandomlyCoroutine(bool sendOnRotateEvent = true, bool sendOnCompleteEvent = true)
     {
-        isRotating = true;
-
-        if(sendOnRotateEvent)
+        if (sendOnRotateEvent)
+        {
             onRotate.Invoke(this);
+        }
 
         // Choose -1 or 1 at random
         int dir = ((Random.value * 2) - 1) < 1 ? -1 : 1;
@@ -181,7 +195,11 @@ public class Pipe : MonoBehaviour, IInteractable
         }
         else if(sendOnCompleteEvent)
         {
-            onRotateCompleted.Invoke();
+            while (!isRotating)
+            {        
+                onRotateCompleted.Invoke();
+                isRotating = false;
+            }
         }
     }
 

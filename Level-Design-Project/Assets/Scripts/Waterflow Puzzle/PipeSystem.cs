@@ -12,11 +12,10 @@ public class PipeSystem : MonoBehaviour {
     // All pipes in the system - Retrieved in start
     Pipe[] pipes;
 
-    // All pipes in the system that have power
-    private List<Pipe> poweredPipes = new List<Pipe>();
-
     // Controls the rotation speed of all pipes in the system
     public float pipeRotationSpeed = 1f;
+
+    public List<Pipe> poweredPipes;
 
     // Event is called when connected from start to finish
     public UnityEvent onComplete;
@@ -29,6 +28,8 @@ public class PipeSystem : MonoBehaviour {
 
     private void Start()
     {
+        poweredPipes = new List<Pipe>();
+
         pipes = GetComponentsInChildren<Pipe>();
 
         for(int i = 0; i < pipes.Length; i++)
@@ -104,11 +105,16 @@ public class PipeSystem : MonoBehaviour {
     }
 
     // Recursive method for retrieving all powered pipes
-    private void UpdateConnections(Pipe pipe, PipeConnector connectedPoint, Pipe skipPipe = null)
+    private IEnumerator UpdateConnections(List<Pipe> poweredPipes, Pipe pipe, PipeConnector connectedPoint, Pipe skipPipe = null)
     {
+        if(poweredPipes == null)
+        {
+            poweredPipes = new List<Pipe>();
+        }
+
         // Skip the pipe if told to or if the system has no power anyway
         if (skipPipe == pipe || isPowered == false)
-            return;
+            yield break;
 
         int connectionsNo = pipe.connections.Length;
 
@@ -129,18 +135,40 @@ public class PipeSystem : MonoBehaviour {
             // Process the connected pipes connections only if it doesn't have power already
             if (connected != null && !poweredPipes.Contains(connected.parent))
             {
-                UpdateConnections(connected.parent, connected, skipPipe);
+                Debug.Log("Connection Loop");
+                yield return UpdateConnections(poweredPipes, connected.parent, connected, skipPipe);
             }
         }
     }
 
+    Coroutine updatePipeStatesCoroutine;
+
     public void UpdatePipesStates(Pipe skipPipe = null)
     {
+        // Ensure update pipes state is only run once at a time
+        if(updatePipeStatesCoroutine != null)
+        {
+            //StopCoroutine(updatePipeStatesCoroutine);
+        }
+
+        isUpdatingPipeStates = true;
+        updatePipeStatesCoroutine = StartCoroutine(UpdatePipeStatesCoroutine(skipPipe));
+    }
+
+    bool isUpdatingPipeStates = false;
+
+    public IEnumerator UpdatePipeStatesCoroutine(Pipe skipPipe = null)
+    { 
+        Debug.Log("UpdatePipesStates called.");
+
         // Empty powered pipes list
         poweredPipes.Clear();
 
-        // Update list of powered pipes
-        UpdateConnections(start, null, skipPipe);
+        // Wait for connectors to update
+        yield return new WaitForFixedUpdate();
+
+        // Update list of powered pipe connectors
+        yield return StartCoroutine(UpdateConnections(poweredPipes, start, null, skipPipe));
 
         // Activate powered pipes and deactivate non-powered pipes
         for (int i = 0; i < pipes.Length; i++)
@@ -148,6 +176,7 @@ public class PipeSystem : MonoBehaviour {
             if (poweredPipes.Contains(pipes[i]))
             {
                 pipes[i].HasPower = true;
+
             }
             else
             {
@@ -155,9 +184,15 @@ public class PipeSystem : MonoBehaviour {
             }
         }
 
+        yield return null;
+
         if (finish.HasPower)
         {
-            onComplete.Invoke();
+            while (isUpdatingPipeStates)
+            {
+                onComplete.Invoke();
+                isUpdatingPipeStates = false;
+            }
 
             // Lock interaction on complete if told to
             if (lockOnComplete)
@@ -168,6 +203,8 @@ public class PipeSystem : MonoBehaviour {
                 }
             }
         }
+        else
+            isUpdatingPipeStates = false;
     }
 
     public void Shuffle()

@@ -6,12 +6,12 @@ public class PipeConnector : MonoBehaviour
 {
     [HideInInspector]
     public Pipe parent;
-    [HideInInspector] 
+    //[HideInInspector] 
     public PipeConnector connected;
     [SerializeField]
     public LayerMask collisionMask;
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (collisionMask == (collisionMask | (1 << other.gameObject.layer)))
         {
