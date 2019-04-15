@@ -49,13 +49,11 @@ public class Pipe : MonoBehaviour, IInteractable
 
             if (hasPower)
             {
-                Debug.Log("Powered", gameObject);
                 onPowered.Invoke();
             }
             else
             {
                 onNotPowered.Invoke();
-                Debug.Log("Unpowered", gameObject);
             }
         }
     }

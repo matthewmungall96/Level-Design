@@ -20,6 +20,9 @@ public class PipeSystem : MonoBehaviour {
     // Event is called when connected from start to finish
     public UnityEvent onComplete;
 
+    // Event is called when box receives power
+    public UnityEvent onPowered;
+
     // Controls whether the system has any power to it
     public bool isPowered = true;
 
@@ -79,6 +82,9 @@ public class PipeSystem : MonoBehaviour {
         if (isPowered)
         {
             start.HasPower = true;
+
+            if(onPowered != null)
+                onPowered.Invoke();
         }
         else
         {

@@ -14,6 +14,8 @@ namespace UniProject
         public PlayerInteraction GetInteractionSystem { get; private set; }
         public FirstPersonController GetFirstPersonController { get; private set; }
 
+        public GameObject timePiece;
+
         private void Awake()
         {
             if (instance == null)
@@ -27,6 +29,16 @@ namespace UniProject
 
             GetInteractionSystem = GetComponent<PlayerInteraction>();
             GetFirstPersonController = GetComponent<FirstPersonController>();
+        }
+
+        public void EnableTimePiece()
+        {
+            timePiece.SetActive(true);
+        }
+
+        public void SetHasTimePiece()
+        {
+            GameManager.Instance.GetPersistedLevelData.HasTimePiece = true;
         }
     }
 }

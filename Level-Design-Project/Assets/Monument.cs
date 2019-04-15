@@ -51,8 +51,11 @@ public class Monument : MonoBehaviour
         yield return null;
 
         // Load persisted data
-        PersistedLevelData levelData = GameManager.Instance.GetPersistedLevelData;
-        SetComplete(levelData.WaterworksPowered, levelData.ObservatoryPowered, true);
+        if (GameManager.Instance != null)
+        {
+            PersistedLevelData levelData = GameManager.Instance.GetPersistedLevelData;
+            SetComplete(levelData.WaterworksPowered, levelData.ObservatoryPowered, true);
+        }
     }
 
     public void SetComplete(bool waterworks, bool observatory, bool triggerEvents = false)

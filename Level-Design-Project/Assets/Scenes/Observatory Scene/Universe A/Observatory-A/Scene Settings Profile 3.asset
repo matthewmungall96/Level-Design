@@ -41,7 +41,7 @@ MonoBehaviour:
     showEyeDropper: 1
   density:
     m_OverrideState: 1
-    m_Value: 0.987
+    m_Value: 0.956
     min: 0
     max: 1
   maxFogDistance:

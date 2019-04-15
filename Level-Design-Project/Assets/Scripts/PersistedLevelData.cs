@@ -6,4 +6,6 @@ public class PersistedLevelData : MonoBehaviour
 {
     public bool ObservatoryPowered;
     public bool WaterworksPowered;
+    public bool GameStarted;
+    public bool HasTimePiece;
 }

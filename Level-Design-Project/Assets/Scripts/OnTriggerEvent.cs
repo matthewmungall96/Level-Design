@@ -17,7 +17,8 @@ public class OnTriggerEvent : MonoBehaviour
 
         if (other.tag == "Player")
         {
-                onTriggered.Invoke();
+            onTriggered.Invoke();
+            isTriggered = true;
         }
     }
 }

@@ -30,7 +30,25 @@ public class LevelManager : MonoBehaviour
         if(onStart != null)
             onStart.Invoke();
 
-        StartCoroutine(LateStart());
+        if (GameManager.Instance != null)
+        {
+            PersistedLevelData levelData = GameManager.Instance.GetPersistedLevelData;
+
+            if (!levelData.GameStarted)
+            {
+                levelData.GameStarted = true;
+                StartCoroutine(LateStart());
+            }
+
+            if(levelData.HasTimePiece)
+            {
+                UniProject.Player.Instance.EnableTimePiece();
+            }
+        }
+        else
+        {
+            StartCoroutine(LateStart());
+        }
     }
 
     IEnumerator LateStart()
