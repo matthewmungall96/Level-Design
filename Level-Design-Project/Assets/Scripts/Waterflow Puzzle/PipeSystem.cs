@@ -29,6 +29,13 @@ public class PipeSystem : MonoBehaviour {
     // Locks interaction on complete
     public bool lockOnComplete = true;
 
+    [SerializeField] public LayerMask connectorCollisionMask;
+
+    public void SetConnectorCollisionMask(LayerMask collisionMask)
+    {
+        connectorCollisionMask = collisionMask;
+    }
+
     private void Start()
     {
         poweredPipes = new List<Pipe>();
@@ -39,6 +46,7 @@ public class PipeSystem : MonoBehaviour {
         {
             pipes[i].onRotate += UpdatePipesStates;
             pipes[i].onRotateCompleted += ()=> UpdatePipesStates();
+            pipes[i].SetConnectorCollisionMask(this.connectorCollisionMask);
         }
 
         SetPipeRotationSpeed(pipeRotationSpeed, pipes);
@@ -97,6 +105,7 @@ public class PipeSystem : MonoBehaviour {
     private void OnValidate()
     {
         SetPipeRotationSpeed(pipeRotationSpeed);
+        SetConnectorCollisionMask(this.connectorCollisionMask);
     }
 
     // Set rotation speed for all pipes in the system

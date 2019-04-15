@@ -34,6 +34,21 @@ public class Pipe : MonoBehaviour, IInteractable
     // Amount to rotate the pipe by each time
     float rotateByAmount = 90;
 
+    private LayerMask connectorCollisionMask;
+    public LayerMask ConnectorCollisionMask
+    {
+        get
+        {
+            return connectorCollisionMask;
+        }
+        set
+        {
+            SetConnectorCollisionMask(value);
+
+            connectorCollisionMask = value;
+        }
+    }
+
     // Holds the pipes state
     bool hasPower;
     public bool HasPower
@@ -93,6 +108,18 @@ public class Pipe : MonoBehaviour, IInteractable
                 meshRend[i].material.SetColor("_BaseColor", Color.blue);
             }
         });
+    }
+
+    public void SetConnectorCollisionMask(LayerMask collisionMask)
+    {
+        connections = GetComponentsInChildren<PipeConnector>();
+
+        this.connectorCollisionMask = collisionMask;
+
+        for (int i = 0; i < connections.Length; i++)
+        {
+            connections[i].collisionMask = this.connectorCollisionMask;
+        }
     }
 
     // Rotates the pipe 90 Degrees

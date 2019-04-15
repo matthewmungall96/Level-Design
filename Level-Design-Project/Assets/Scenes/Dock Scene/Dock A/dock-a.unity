@@ -24627,6 +24627,11 @@ PrefabInstance:
       propertyPath: onComplete.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_StringArgument
       value: Activate
       objectReference: {fileID: 0}
+    - target: {fileID: 4017033082682524497, guid: 68e5b474754f05e4c8bca33f707985ca,
+        type: 3}
+      propertyPath: connectorCollisionMask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 1946629573852919817, guid: 68e5b474754f05e4c8bca33f707985ca,
         type: 3}
       propertyPath: m_Layer

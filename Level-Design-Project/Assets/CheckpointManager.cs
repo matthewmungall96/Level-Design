@@ -11,10 +11,6 @@ public class CheckpointManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
-        }    
-        else
-        {
-            Destroy(gameObject);
         }
     }
 
