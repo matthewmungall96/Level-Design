@@ -19,7 +19,8 @@ public class UniverseSyncManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        UniverseController.onUniverseChanged.RemoveListener(OnUniverseChanged);
+        if(UniverseController.onUniverseChanged != null)
+            UniverseController.onUniverseChanged.RemoveListener(OnUniverseChanged);
     }
 
     private void Start()

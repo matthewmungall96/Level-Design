@@ -150,7 +150,6 @@ public class PipeSystem : MonoBehaviour {
             // Process the connected pipes connections only if it doesn't have power already
             if (connected != null && !poweredPipes.Contains(connected.parent))
             {
-                Debug.Log("Connection Loop");
                 yield return UpdateConnections(poweredPipes, connected.parent, connected, skipPipe);
             }
         }
@@ -174,8 +173,6 @@ public class PipeSystem : MonoBehaviour {
 
     public IEnumerator UpdatePipeStatesCoroutine(Pipe skipPipe = null)
     { 
-        Debug.Log("UpdatePipesStates called.");
-
         // Empty powered pipes list
         poweredPipes.Clear();
 

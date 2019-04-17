@@ -140,7 +140,6 @@ public class Pipe : MonoBehaviour, IInteractable
 
     IEnumerator RotateCoroutine(int dir)
     {
-        Debug.Log("Rotate Coroutine called.");
         onRotate.Invoke(this);
 
         // Smooth lerp to target rotation
@@ -166,7 +165,6 @@ public class Pipe : MonoBehaviour, IInteractable
         {
             while (isRotating)
             {
-                Debug.Log("OnRotateComplete called. onRotateCompleted " + onRotateCompleted.ToString());
                 onRotateCompleted.Invoke();
                 isRotating = false;
             }

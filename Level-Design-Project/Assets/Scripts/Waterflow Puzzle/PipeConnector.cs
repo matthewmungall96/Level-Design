@@ -24,7 +24,6 @@ public class PipeConnector : MonoBehaviour
         {
             connected = other.GetComponent<PipeConnector>();
             connectedID = other.GetInstanceID();
-            Debug.Log("Connecccct");
         }
     }
 
