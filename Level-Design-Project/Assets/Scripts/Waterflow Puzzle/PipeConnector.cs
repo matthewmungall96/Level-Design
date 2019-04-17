@@ -8,14 +8,23 @@ public class PipeConnector : MonoBehaviour
     public Pipe parent;
     //[HideInInspector] 
     public PipeConnector connected;
+    private int connectedID;
+
     [SerializeField]
     public LayerMask collisionMask;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
+        if(connected != null && other.GetInstanceID() == connectedID)
+        {
+            return;
+        }
+
         if (collisionMask == (collisionMask | (1 << other.gameObject.layer)))
         {
             connected = other.GetComponent<PipeConnector>();
+            connectedID = other.GetInstanceID();
+            Debug.Log("Connecccct");
         }
     }
 
