@@ -35,7 +35,7 @@ public class FadeOverlay : MonoBehaviour
     private IEnumerator FadeOut()
     {
         Color color = overlayImg.color;
-        color.a = 1;
+        color.a = 0;
         overlayImg.color = color;
 
         for (float i = 0; i < fadeDuration; i += Time.deltaTime)
@@ -46,6 +46,8 @@ public class FadeOverlay : MonoBehaviour
 
             yield return null;
         }
+
+        SetFade(1);
     }
 
     public void SetFade(int alpha)
@@ -58,7 +60,7 @@ public class FadeOverlay : MonoBehaviour
     private IEnumerator FadeIn()
     {
         Color color = overlayImg.color;
-        color.a = 0;
+        color.a = 1;
         overlayImg.color = color;
 
         for (float i = 0; i < fadeDuration; i += Time.deltaTime)
@@ -69,5 +71,7 @@ public class FadeOverlay : MonoBehaviour
 
             yield return null;
         }
+
+        SetFade(0);
     }
 }

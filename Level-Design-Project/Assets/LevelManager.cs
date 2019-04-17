@@ -84,7 +84,7 @@ public class LevelManager : MonoBehaviour
             yield return new WaitForSeconds(alphaFadeOutDuration);
         }
 
-        // TODO Play animation
+        yield return GameManager.Instance.GetFadeOverlay.Fade(1);
 
         fpc.enabled = true;
     }

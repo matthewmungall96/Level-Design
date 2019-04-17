@@ -65,7 +65,7 @@ namespace UniProject
 
             currentScene = SceneManager.GetSceneByBuildIndex(sceneBuildIndex);
 
-            yield return GameManager.Instance.GetFadeOverlay.Fade(1);
+            //yield return GameManager.Instance.GetFadeOverlay.Fade(1);
 
             isTransitioning = false;
         }
@@ -74,7 +74,7 @@ namespace UniProject
         {
             if (isTransitioning || string.IsNullOrEmpty(sceneName))
                 return;
-
+            Debug.Log("Fading to scene.");
             StartCoroutine("FadeToSceneCoroutine", sceneName);
         }
 

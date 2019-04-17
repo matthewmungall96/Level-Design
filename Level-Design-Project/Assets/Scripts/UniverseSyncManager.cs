@@ -13,14 +13,14 @@ public class UniverseSyncManager : MonoBehaviour
 
     private void Awake()
     {
-        UniverseController.onUniverseChanged = UniverseController.onUniverseChanged ?? new OnUniverseChanged();
-        UniverseController.onUniverseChanged.AddListener(OnUniverseChanged);
+        //UniverseController.onUniverseChanged = UniverseController.onUniverseChanged ?? new OnUniverseChanged();
+        //UniverseController.onUniverseChanged.AddListener(OnUniverseChanged);
     }
 
     private void OnDestroy()
     {
-        if(UniverseController.onUniverseChanged != null)
-            UniverseController.onUniverseChanged.RemoveListener(OnUniverseChanged);
+        //if (UniverseController.onUniverseChanged != null)
+        //    UniverseController.onUniverseChanged.RemoveListener(OnUniverseChanged);
     }
 
     private void Start()

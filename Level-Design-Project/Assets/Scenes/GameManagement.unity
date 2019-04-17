@@ -186,15 +186,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 169478803, guid: 95d3cd167f693b34c87e3e62c006ce2d, type: 3}
       propertyPath: overlayColour.r
-      value: 0.24528301
+      value: 0.122641504
       objectReference: {fileID: 0}
     - target: {fileID: 169478803, guid: 95d3cd167f693b34c87e3e62c006ce2d, type: 3}
       propertyPath: overlayColour.g
-      value: 0.24528301
+      value: 0.122641504
       objectReference: {fileID: 0}
     - target: {fileID: 169478803, guid: 95d3cd167f693b34c87e3e62c006ce2d, type: 3}
       propertyPath: overlayColour.b
-      value: 0.24528301
+      value: 0.122641504
+      objectReference: {fileID: 0}
+    - target: {fileID: 169478803, guid: 95d3cd167f693b34c87e3e62c006ce2d, type: 3}
+      propertyPath: fadeDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 169478803, guid: 95d3cd167f693b34c87e3e62c006ce2d, type: 3}
+      propertyPath: fadedOnLoad
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6109973254023380423, guid: 95d3cd167f693b34c87e3e62c006ce2d,
         type: 3}

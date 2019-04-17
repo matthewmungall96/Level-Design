@@ -14,6 +14,7 @@ public class UniverseChange : MonoBehaviour
 
     private void Start()
     {
+        UniverseController.onUniverseChanged = UniverseController.onUniverseChanged ?? new OnUniverseChanged();
         UniverseController.onUniverseChanged.AddListener(OnSelectedUniverseActive);
     }
 
