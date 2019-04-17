@@ -30,6 +30,12 @@ public class Monument : MonoBehaviour
     [SerializeField]
     UnityEvent onUnpowered;
 
+    [SerializeField]
+    UnityEvent onObservatoryPowered;
+
+    [SerializeField]
+    UnityEvent onWaterworksPowered;
+
     private void OnValidate()
     {
         materials = GetComponent<MeshRenderer>().sharedMaterials;
@@ -70,11 +76,20 @@ public class Monument : MonoBehaviour
 
             if(triggerEvents && onPowered != null)
                 onPowered.Invoke();
+
+            if (onWaterworksPowered != null)
+                onWaterworksPowered.Invoke();
+
+            if (onObservatoryPowered != null)
+                onObservatoryPowered.Invoke();
         }
         else if(waterworks)
         {
             if (triggerEvents && onUnpowered != null)
                 onUnpowered.Invoke();
+
+            if (onWaterworksPowered != null)
+                onWaterworksPowered.Invoke();
 
             materials[1] = poweredMat;
             materials[2] = unpoweredMat;
@@ -85,6 +100,9 @@ public class Monument : MonoBehaviour
         {
             if (triggerEvents && onUnpowered != null)
                 onUnpowered.Invoke();
+
+            if (onObservatoryPowered != null)
+                onObservatoryPowered.Invoke();
 
             materials[1] = unpoweredMat;
             materials[2] = poweredMat;
