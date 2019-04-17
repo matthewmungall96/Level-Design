@@ -1,0 +1,44 @@
+Required Chat Mapper Template Fields for: D:\GitHub\Level-Design\Level-Design-Project\Assets\Animations\Matthew Animation\Roman_House\Nathan Hill.xml
+
+ACTORS (in this order):
+[1] Name: Text
+[2] Pictures: Files
+[3] Description: Text
+[4] IsPlayer: Boolean
+
+ITEMS (in this order):
+[1] Name: Text
+[2] Pictures: Files
+[3] Description: Text
+[4] Is Item: Boolean
+
+LOCATIONS (in this order):
+[1] Name: Text
+[2] Pictures: Files
+[3] Description: Text
+
+USER VARIABLES (in this order):
+[1] Name: Text
+[2] Initial Value: Text
+[3] Description: Text
+
+CONVERSATIONS (in this order):
+[1] Title: Text
+[2] Pictures: Files
+[3] Description: Text
+[4] Actor: Actor
+[5] Conversant: Actor
+
+DIALOGUE NODES (in this order):
+[1] Title: Text
+[2] Pictures: Files
+[3] Description: Text
+[4] Actor: Actor
+[5] Conversant: Actor
+[6] Menu Text: Text
+[7] Dialogue Text: Text
+[8] Parenthetical: Text
+[9] Audio Files: Files
+[10] Video File: Text
+[11] Sequence: Text
+[12] canvasRect: Text
