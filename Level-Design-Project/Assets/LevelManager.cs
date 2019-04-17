@@ -24,6 +24,14 @@ public class LevelManager : MonoBehaviour
     float alphaFadeInDuration = 1;
     [SerializeField]
     float alphaFadeOutDuration = 1;
+    [SerializeField]
+    AnimationCurve audioFadeInCurve;
+    [SerializeField]
+    float audioFadeInDuration = 1;
+    [SerializeField]
+    AudioSource audioSource;
+
+    private float defaultVolume;
 
     void Start()
     {
@@ -61,6 +69,8 @@ public class LevelManager : MonoBehaviour
     IEnumerator PlayOpeningSequenceCoroutine()
     {
         //GameManager.Instance.GetFadeOverlay.SetFade(1);
+        defaultVolume = audioSource.volume;
+        audioSource.volume = 0;
 
         FirstPersonController fpc = UniProject.Player.Instance.GetFirstPersonController;
         fpc.enabled = false;
@@ -84,8 +94,22 @@ public class LevelManager : MonoBehaviour
             yield return new WaitForSeconds(alphaFadeOutDuration);
         }
 
-        yield return GameManager.Instance.GetFadeOverlay.Fade(1);
-
         fpc.enabled = true;
+
+        StartCoroutine(FadeInAudio());
+
+        // TODO Fade in Audio
+        yield return GameManager.Instance.GetFadeOverlay.Fade(1);
+        
+    }
+
+    IEnumerator FadeInAudio()
+    {
+        yield return null;
+
+       for(float i = 0; i < audioFadeInDuration; i += Time.deltaTime)
+        {
+            audioSource.volume = defaultVolume * audioFadeInCurve.Evaluate(i / audioFadeInDuration);
+        }
     }
 }

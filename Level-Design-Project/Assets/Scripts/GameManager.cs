@@ -58,7 +58,7 @@ namespace UniProject
                 {
                     GetSceneManager.AsyncLoadAlternate(areaData, () =>
                     {
-                        //GetFadeOverlay.Fade(1);
+                        GetFadeOverlay.Fade(1);
                     });
                 }
                 else
