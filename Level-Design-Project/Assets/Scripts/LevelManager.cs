@@ -48,7 +48,19 @@ public class LevelManager : MonoBehaviour
                 StartCoroutine(LateStart());
             }
 
-            if(levelData.HasTimePiece)
+            if(levelData.RespawnFromObservatory)
+            {
+                CheckpointManager.Instance.SetCheckpointIndex(1);
+                levelData.RespawnFromObservatory = false;
+                CheckpointManager.Instance.Respawn();
+            }
+            else if (levelData.RespawnFromWaterworks) {
+                CheckpointManager.Instance.SetCheckpointIndex(2);
+                levelData.RespawnFromWaterworks = false;
+                CheckpointManager.Instance.Respawn();
+            }
+
+            if (levelData.HasTimePiece)
             {
                 UniProject.Player.Instance.EnableTimePiece();
             }
@@ -111,5 +123,17 @@ public class LevelManager : MonoBehaviour
         {
             audioSource.volume = defaultVolume * audioFadeInCurve.Evaluate(i / audioFadeInDuration);
         }
+    }
+
+    public void EndGame()
+    {
+        UniProject.Player.Instance.GetComponent<FirstPersonController>().enabled = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void CloseGame()
+    {
+        Application.Quit();
     }
 }

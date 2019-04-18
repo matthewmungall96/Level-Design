@@ -8,4 +8,7 @@ public class PersistedLevelData : MonoBehaviour
     public bool WaterworksPowered;
     public bool GameStarted;
     public bool HasTimePiece;
+
+    public bool RespawnFromObservatory;
+    public bool RespawnFromWaterworks;
 }

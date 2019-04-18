@@ -198,7 +198,7 @@ public class PipeSystem : MonoBehaviour {
 
         yield return null;
 
-        if (finish.HasPower)
+        if (finish != null && finish.HasPower)
         {
             while (isUpdatingPipeStates)
             {
@@ -209,10 +209,7 @@ public class PipeSystem : MonoBehaviour {
             // Lock interaction on complete if told to
             if (lockOnComplete)
             {
-                for (int i = 0; i < pipes.Length; i++)
-                {
-                    pipes[i].IsLocked = true;
-                }
+                Lock();
             }
         }
         else
@@ -223,6 +220,14 @@ public class PipeSystem : MonoBehaviour {
     {
         //UpdatePipesStates();
         StartCoroutine("ShuffleCoroutine");
+    }
+
+    public void Lock()
+    {
+        for (int i = 0; i < pipes.Length; i++)
+        {
+            pipes[i].IsLocked = true;
+        }
     }
 
     IEnumerator ShuffleCoroutine()

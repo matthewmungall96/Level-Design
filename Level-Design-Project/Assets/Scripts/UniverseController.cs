@@ -43,6 +43,8 @@ public class UniverseController : MonoBehaviour
     [HideInInspector]
     public Universes currentUniverse;
 
+    [SerializeField] private bool isLocked = true;
+    public bool IsLocked { get { return isLocked; } set { isLocked = value; } }
     public static OnUniverseChanged onUniverseChanged;
 
 	void Awake()
@@ -59,7 +61,7 @@ public class UniverseController : MonoBehaviour
 
 	void Update()
 	{
-		if (!Swapping && Input.GetKeyDown(SwapInput))
+		if (!Swapping && !IsLocked && Input.GetKeyDown(SwapInput))
 		{
 			StartCoroutine(SwapAsync());
 		}

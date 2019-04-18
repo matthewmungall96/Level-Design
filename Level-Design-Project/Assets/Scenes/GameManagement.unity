@@ -379,5 +379,30 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.14150941
       objectReference: {fileID: 0}
+    - target: {fileID: 3430888899386771802, guid: 95d3cd167f693b34c87e3e62c006ce2d,
+        type: 3}
+      propertyPath: WaterworksPowered
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3430888899386771802, guid: 95d3cd167f693b34c87e3e62c006ce2d,
+        type: 3}
+      propertyPath: GameStarted
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3430888899386771802, guid: 95d3cd167f693b34c87e3e62c006ce2d,
+        type: 3}
+      propertyPath: RespawnFromWaterworks
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3430888899386771802, guid: 95d3cd167f693b34c87e3e62c006ce2d,
+        type: 3}
+      propertyPath: RespawnFromObservatory
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3430888899386771802, guid: 95d3cd167f693b34c87e3e62c006ce2d,
+        type: 3}
+      propertyPath: ObservatoryPowered
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95d3cd167f693b34c87e3e62c006ce2d, type: 3}
