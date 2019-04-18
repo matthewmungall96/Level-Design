@@ -33,12 +33,18 @@ namespace UniProject
 
         public void EnableTimePiece()
         {
-            timePiece.SetActive(true);
+            timePiece.GetComponentInChildren<UniverseController>().IsLocked = false;
+        }
+
+        public void DisableTimePiece()
+        {
+            timePiece.GetComponentInChildren<UniverseController>().IsLocked = true;
         }
 
         public void SetHasTimePiece()
         {
             GameManager.Instance.GetPersistedLevelData.HasTimePiece = true;
+            EnableTimePiece();
         }
     }
 }

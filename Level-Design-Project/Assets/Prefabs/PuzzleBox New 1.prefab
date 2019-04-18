@@ -411,8 +411,16 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onPowered:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   isPowered: 1
   lockOnComplete: 1
+  connectorCollisionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!82 &1946629573959249962
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2439,7 +2447,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 86e64db006493564195e8f60a1f5712d, type: 2}
+      objectReference: {fileID: 2100000, guid: 90da30d4f669b8e46af118e26431f760, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7c8520a2c2f7614f90ad26b1d8bc83b, type: 3}
 --- !u!23 &2134856340268148323 stripped
@@ -2657,7 +2665,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 86e64db006493564195e8f60a1f5712d, type: 2}
+      objectReference: {fileID: 2100000, guid: 90da30d4f669b8e46af118e26431f760, type: 2}
     - target: {fileID: 114267510091287650, guid: f35581c670e027241ae6ae0638af03b8,
         type: 3}
       propertyPath: collisionMask.m_Bits
@@ -2672,7 +2680,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 86e64db006493564195e8f60a1f5712d, type: 2}
+      objectReference: {fileID: 2100000, guid: 90da30d4f669b8e46af118e26431f760, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f35581c670e027241ae6ae0638af03b8, type: 3}
 --- !u!23 &6228237655129006426 stripped
@@ -3059,7 +3067,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 86e64db006493564195e8f60a1f5712d, type: 2}
+      objectReference: {fileID: 2100000, guid: 90da30d4f669b8e46af118e26431f760, type: 2}
     - target: {fileID: 114267510091287650, guid: f35581c670e027241ae6ae0638af03b8,
         type: 3}
       propertyPath: collisionMask.m_Bits
@@ -3074,7 +3082,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 86e64db006493564195e8f60a1f5712d, type: 2}
+      objectReference: {fileID: 2100000, guid: 90da30d4f669b8e46af118e26431f760, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f35581c670e027241ae6ae0638af03b8, type: 3}
 --- !u!4 &8931907528591850819 stripped

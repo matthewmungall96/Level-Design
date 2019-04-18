@@ -66,6 +66,11 @@ public class CheckpointManager : MonoBehaviour
         respawning = false;
     }
 
+    public void SetCheckpointIndex(int index)
+    {
+        currentCheckpointIdx = index;
+    }
+
     public void IncrementCheckpointIndex()
     {
         currentCheckpointIdx++;

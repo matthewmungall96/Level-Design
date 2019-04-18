@@ -11,6 +11,7 @@ public class ParentCollidingPlayer : MonoBehaviour
             Debug.Log("With Colliding.");
 
             collider.transform.SetParent(transform);
+            collider.transform.localScale = Vector3.one;
         }
         Debug.Log("Colliding.");
     }

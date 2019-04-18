@@ -96,17 +96,17 @@ public class Pipe : MonoBehaviour, IInteractable
 
         // Temp behaviour on powered
         onPowered.AddListener(() => {
-            for (int i = 0; i < meshRend.Length; i++)
-            {
-                meshRend[i].material.SetColor("_BaseColor", Color.green);
-            }
+            //for (int i = 0; i < meshRend.Length; i++)
+            //{
+            //    meshRend[i].material.SetColor("_BaseColor", Color.green);
+            //}
         });
 
         onNotPowered.AddListener(() => {
-            for (int i = 0; i < meshRend.Length; i++)
-            {
-                meshRend[i].material.SetColor("_BaseColor", Color.blue);
-            }
+            //for (int i = 0; i < meshRend.Length; i++)
+            //{
+            //    meshRend[i].material.SetColor("_BaseColor", Color.blue);
+            //}
         });
     }
 

@@ -20,11 +20,13 @@ namespace UniProject
         public void SetWaterworksPowered()
         {
             GameManager.Instance.GetPersistedLevelData.WaterworksPowered = true;
+            GameManager.Instance.GetPersistedLevelData.RespawnFromWaterworks = true;
         }
 
         public void SetObservatoryPowered()
         {
             GameManager.Instance.GetPersistedLevelData.ObservatoryPowered = true;
+            GameManager.Instance.GetPersistedLevelData.RespawnFromObservatory = true;
         }
     }
 }
