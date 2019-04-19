@@ -21,6 +21,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     float textDuration = 5;
     [SerializeField]
+    float startingAlpha = .8f;
+    [SerializeField]
     float alphaFadeInDuration = 1;
     [SerializeField]
     float alphaFadeOutDuration = 1;
@@ -84,6 +86,18 @@ public class LevelManager : MonoBehaviour
         defaultVolume = audioSource.volume;
         audioSource.volume = 0;
 
+        int tryCount = 0;
+        while (GameManager.Instance == null || GameManager.Instance.GetFadeOverlay == null)
+        {
+            tryCount++;
+            yield return null;
+
+            if (tryCount > 1000)
+                yield break;
+        }
+
+        GameManager.Instance.GetFadeOverlay.SetFade(startingAlpha);
+
         FirstPersonController fpc = UniProject.Player.Instance.GetFirstPersonController;
         fpc.enabled = false;
 
@@ -111,7 +125,7 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(FadeInAudio());
 
         // TODO Fade in Audio
-        yield return GameManager.Instance.GetFadeOverlay.Fade(1);
+        yield return GameManager.Instance.GetFadeOverlay.Fade(1, false);
         
     }
 

@@ -12,23 +12,17 @@ namespace UniProject
         public static Player Instance { get { return instance; } }
 
         public PlayerInteraction GetInteractionSystem { get; private set; }
-        public FirstPersonController GetFirstPersonController { get; private set; }
+        private FirstPersonController firstPersonController;
+        public FirstPersonController GetFirstPersonController { get { return firstPersonController == null ? GetComponent<FirstPersonController>() : firstPersonController; }  }
 
         public GameObject timePiece;
 
         private void Awake()
         {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else
-            {
-                Destroy(this);
-            }
+            instance = this;
 
             GetInteractionSystem = GetComponent<PlayerInteraction>();
-            GetFirstPersonController = GetComponent<FirstPersonController>();
+            firstPersonController = GetComponent<FirstPersonController>();
         }
 
         public void EnableTimePiece()

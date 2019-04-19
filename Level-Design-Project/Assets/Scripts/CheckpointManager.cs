@@ -46,6 +46,7 @@ public class CheckpointManager : MonoBehaviour
 
     private IEnumerator RespawnCoroutine()
     {
+        Debug.Log("Player instance is null " + (UniProject.Player.Instance == null));
 
         // Fade out
         UniProject.GameManager.Instance.GetFadeOverlay.SetFadeDuration(.3f);
@@ -55,7 +56,7 @@ public class CheckpointManager : MonoBehaviour
         UniProject.Player.Instance.GetFirstPersonController.enabled = false;
 
         MovePlayerToCheckpoint();
-
+        
         // FadeIn
         UniProject.GameManager.Instance.GetFadeOverlay.SetFadeDuration(.6f);
         yield return UniProject.GameManager.Instance.GetFadeOverlay.Fade(1);
