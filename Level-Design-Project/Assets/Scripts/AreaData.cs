@@ -28,5 +28,10 @@ namespace UniProject
             GameManager.Instance.GetPersistedLevelData.ObservatoryPowered = true;
             GameManager.Instance.GetPersistedLevelData.RespawnFromObservatory = true;
         }
+
+        public void CloseGame()
+        {
+            Application.Quit();
+        }
     }
 }

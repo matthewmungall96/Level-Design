@@ -22,9 +22,9 @@ public class FadeOverlay : MonoBehaviour
         overlayImg.color = col;
     }
 
-    public Coroutine Fade(int direction)
+    public Coroutine Fade(int direction, bool startFullFade = true)
     {
-        return (direction < 0) ? StartCoroutine("FadeOut") : StartCoroutine("FadeIn");
+        return (direction < 0) ? StartCoroutine("FadeOut", startFullFade) : StartCoroutine("FadeIn", startFullFade);
     }
 
     public void SetFadeDuration(float duration)
@@ -32,10 +32,11 @@ public class FadeOverlay : MonoBehaviour
         fadeDuration = duration;
     }
 
-    private IEnumerator FadeOut()
+    private IEnumerator FadeOut(bool startFullFade = true)
     {
         Color color = overlayImg.color;
-        color.a = 0;
+        if(startFullFade)
+            color.a = 0;
         overlayImg.color = color;
 
         for (float i = 0; i < fadeDuration; i += Time.deltaTime)
@@ -50,16 +51,17 @@ public class FadeOverlay : MonoBehaviour
         SetFade(1);
     }
 
-    public void SetFade(int alpha)
+    public void SetFade(float alpha)
     {
         Color color = overlayImg.color;
         color.a = alpha;
         overlayImg.color = color;
     }
 
-    private IEnumerator FadeIn()
+    private IEnumerator FadeIn(bool startFullFade = true)
     {
         Color color = overlayImg.color;
+        if(startFullFade)
         color.a = 1;
         overlayImg.color = color;
 
